@@ -22,7 +22,7 @@ class SWJProjectsViewDownload extends HtmlView
 	 *
 	 * @since  1.2.0
 	 */
-	protected $file;
+	public $file;
 
 	/**
 	 * Display the view.
