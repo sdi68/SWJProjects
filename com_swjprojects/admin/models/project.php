@@ -57,7 +57,7 @@ class SWJProjectsModelProject extends AdminModel
 
 			// Default values
 			$item->translates = array();
-			$item->downloads  = 0;
+			$item->set('downloads',0);
 
 			// Set values
 			if (!empty($item->id))
@@ -93,7 +93,7 @@ class SWJProjectsModelProject extends AdminModel
 					->from('#__swjprojects_versions')
 					->where('project_id = ' . $item->id);
 				$db->setQuery($query);
-				$item->downloads = $db->loadResult();
+				$item->set('downloads',$db->loadResult());
 			}
 		}
 

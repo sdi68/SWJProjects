@@ -63,7 +63,7 @@ class SWJProjectsViewProject extends HtmlView
 	 *
 	 * @since  1.1.0
 	 */
-	protected $relations;
+	public $relations;
 
 	/**
 	 * Last version object.
