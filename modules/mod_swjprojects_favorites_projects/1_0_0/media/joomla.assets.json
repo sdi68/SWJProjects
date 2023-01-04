@@ -1,0 +1,24 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "mod_swjprojects_favorites_projects",
+  "version": "1.0.0",
+  "description": "Module favorites projects for SWPROJECTS component",
+  "license": "GNU/GPL",
+  "assets": [
+    {
+      "name": "mod_swjprojects_favorites_projects.back",
+      "type": "script",
+      "uri": "mod_swjprojects_favorites_projects/back.js"
+    },
+    {
+      "name": "mod_swjprojects_favorites_projects.back",
+      "type": "style",
+      "uri": "mod_swjprojects_favorites_projects/back.css"
+    },
+    {
+      "name": "mod_swjprojects_favorites_projects.about",
+      "type": "style",
+      "uri": "mod_swjprojects_favorites_projects/about.css"
+    }
+  ]
+}

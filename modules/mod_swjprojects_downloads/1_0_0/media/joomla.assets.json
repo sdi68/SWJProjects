@@ -1,0 +1,34 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "mod_swjprojects_downloads",
+  "version": "1.0.0",
+  "description": "Module user downloads for SWPROJECTS component",
+  "license": "GNU/GPL",
+  "assets": [
+    {
+      "name": "mod_swjprojects_downloads.back",
+      "type": "script",
+      "uri": "mod_swjprojects_downloads/back.js"
+    },
+    {
+      "name": "mod_swjprojects_downloads.front",
+      "type": "script",
+      "uri": "mod_swjprojects_downloads/front.js"
+    },
+    {
+      "name": "mod_swjprojects_downloads.back",
+      "type": "style",
+      "uri": "mod_swjprojects_downloads/back.css"
+    },
+    {
+      "name": "mod_swjprojects_downloads.front",
+      "type": "style",
+      "uri": "mod_swjprojects_downloads/front.css"
+    },
+    {
+      "name": "mod_swjprojects_downloads.about",
+      "type": "style",
+      "uri": "mod_swjprojects_downloads/about.css"
+    }
+  ]
+}

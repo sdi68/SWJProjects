@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @package    SW JProjects Payment
+  ~ @subpackage module mod_swjprojects_favorites_projects
+  ~ @version    1.0.0
+  ~ @author     Econsult lab - https://econsultlab.ru
+  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~  @link       https://econsultlab.ru/
+  -->
+
+<extension version="3.9" type="module" client="site" method="upgrade">
+    <name>MOD_SWJPROJECTS_FAVORITES_PROJECTS</name>
+    <author>ECL</author>
+    <creationDate>November 2022</creationDate>
+    <copyright>Copyright (c) 2022 ECL. All rights reserved.</copyright>
+    <copyright>Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.</copyright>
+    <license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+    <authorEmail>info@econsultlab.ru</authorEmail>
+    <authorUrl>https://econsultlab.ru</authorUrl>
+    <version>1.0.0</version>
+    <description>MOD_SWJPROJECTS_FAVORITES_PROJECTS_DESCRIPTION</description>
+    <scriptfile>script.php</scriptfile>
+    <languages folder="language">
+        <language tag="ru-RU">ru-RU/ru-RU.mod_swjprojects_favorites_projects.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.mod_swjprojects_favorites_projects.sys.ini</language>
+    </languages>
+    <files>
+        <filename module="mod_swjprojects_favorites_projects">mod_swjprojects_favorites_projects.php</filename>
+        <folder>fields</folder>
+        <folder>tmpl</folder>
+        <file>helper.php</file>
+    </files>
+    <media folder="media" destination="mod_swjprojects_favorites_projects">
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>img</folder>
+        <file>joomla.assets.json</file>
+    </media>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="administrator/components/com_swjprojects/models/fields">
+                <field name="use_cat_filter"
+                       type="checkbox"
+                       label="MOD_SWJPROJECTS_PROJECTS_PARAMS_USE_CAT_FILTER_LABEL"
+                       description="MOD_SWJPROJECTS_PROJECTS_PARAMS_USE_CAT_FILTER_DESC"
+                       value="1"/>
+
+                <field name="category" type="categories"
+                       label="MOD_SWJPROJECTS_PROJECTS_PARAMS_CATEGORY"
+                       onchange="update_projects_list(this,'projects');"
+                       showon="use_cat_filter:1"
+                       default="1">
+                    <option value="1">JGLOBAL_ROOT</option>
+                </field>
+                <field name="projects"
+                       type="projects"
+                       label="MOD_SWJPROJECTS_FAVORITES_PROJECTS_PARAMS_PROJECTS"
+                       multiple="true"
+                       required="true"
+                       default="-1">
+                </field>
+                <field
+                        name="ordering"
+                        type="list"
+                        label="MOD_SWJPROJECTS_FIELD_ORDERING_LABEL"
+                        description="MOD_SWJPROJECTS_FIELD_ORDERING_DESC"
+                        default="list.ordering"
+                        validate="options"
+                >
+                    <option value="download_type">MOD_SWJPROJECTS_DOWNLOAD_TYPE</option>
+                    <option value="ordering">MOD_SWJPROJECTS_FIELD_ORDERING_ORDERING</option>
+                    <option value="hits">MOD_SWJPROJECTS_STATISTICS_HITS</option>
+                    <option value="downloads">MOD_SWJPROJECTS_STATISTICS_DOWNLOADS</option>
+                    <option value="rand()">MOD_SWJPROJECTS_NEWS_FIELD_ORDERING_RANDOM</option>
+                </field>
+
+                <field
+                        name="direction"
+                        type="list"
+                        label="JGLOBAL_ORDER_DIRECTION_LABEL"
+                        description="JGLOBAL_ORDER_DIRECTION_DESC"
+                        default="1"
+                        filter="integer"
+                        showon="ordering:id,download_type,hits,downloads,ordering"
+                >
+                    <option value="0">JGLOBAL_ORDER_ASCENDING</option>
+                    <option value="1">JGLOBAL_ORDER_DESCENDING</option>
+                </field>
+
+                <field addfieldpath="modules/mod_swjprojects_favorites_projects/fields"
+                       name="about"
+                       type="about"
+                       ext_page="https://econsultlab.ru/extensions/joomla/packages/swjpayment"
+                       ext_doc="https://econsultlab.ru/extensions/joomla/packages/swjpayment"/>
+
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="layout" type="modulelayout"
+                       label="JFIELD_ALT_LAYOUT_LABEL"
+                       description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+                <field name="moduleclass_sfx" type="textarea"
+                       label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                       description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+                       rows="3"/>
+                <field name="cache" type="list"
+                       label="COM_MODULES_FIELD_CACHING_LABEL"
+                       description="COM_MODULES_FIELD_CACHING_DESC"
+                       default="1">
+                    <option value="1">JGLOBAL_USE_GLOBAL</option>
+                    <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+                </field>
+                <field name="cache_time" type="text"
+                       label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+                       description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+                       default="900"/>
+                <field name="cachemode" type="hidden"
+                       default="static">
+                    <option value="static"/>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" name="mod_swjprojects_favorites_projects">
+            https://econsultlab.ru/uploads/joomla/modules/mod_swjprojects_favorites_projects/update_mod_swjprojects_favorites_projects.xml
+        </server>
+    </updateservers>
+</extension>

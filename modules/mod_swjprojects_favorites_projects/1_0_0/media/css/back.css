@@ -1,0 +1,46 @@
+/*
+ * @package    SW JProjects Payment
+ * @subpackage module mod_swjprojects_favorites_projects
+ * @version    1.0.0
+ * @author     Econsult lab - https://econsultlab.ru
+ * @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ *  @link       https://econsultlab.ru/
+ */
+
+/* блокировка экрана при работе AJAX BOF */
+#ajaxLoading {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#ajaxLoading > img {
+    width: 50px;
+    height: 50px;
+}
+
+.LockOff {
+    display: none;
+    visibility: hidden;
+}
+
+div.LockOn {
+    display: block;
+    visibility: visible;
+    position: fixed;
+    z-index: 998;
+    top: 0px;
+    left: 0px;
+    width: 105%;
+    height: 105%;
+    background-color: #ccc;
+    text-align: center;
+    padding-top: 20%;
+    filter: alpha(opacity=75);
+    opacity: 0.75;
+}
+
+/* блокировка экрана при работе AJAX EOF */

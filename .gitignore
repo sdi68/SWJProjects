@@ -6,5 +6,5 @@ vendor
 composer.json
 build.xml
 composer.phar
-composer.lock!
+composer.lock
 

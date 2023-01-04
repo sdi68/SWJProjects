@@ -1,0 +1,88 @@
+/*
+ * @package    SW JProjects Payment
+ * @subpackage module mod_swjprojects_downloads
+ * @version    1.0.0
+ * @author     Econsult lab - https://econsultlab.ru
+ * @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ * @link       https://econsultlab.ru/
+ */
+
+/* блокировка экрана при работе AJAX BOF */
+#ajaxLoading{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#ajaxLoading > img {
+    width: 50px;
+    height: 50px;
+}
+
+.LockOff {
+    display: none;
+    visibility: hidden;
+}
+
+div.LockOn {
+    display: block;
+    visibility: visible;
+    position: fixed;
+    z-index: 998;
+    top: 0px;
+    left: 0px;
+    width: 105%;
+    height: 105%;
+    background-color: #ccc;
+    text-align: center;
+    padding-top: 20%;
+    filter: alpha(opacity=75);
+    opacity: 0.75;
+}
+
+@media (max-width: 768px) {
+    #ajaxLoading{
+        position: fixed;
+    }
+}
+
+/* блокировка экрана при работе AJAX EOF */
+
+/* Модальное окно BOF */
+#sdiModal .modal-header {
+    background-color: var(--gray-100);
+}
+.modal-body {
+    background-color:var(--body-bg);
+    text-align:center;
+}
+
+/* Модальное окно EOF */
+
+.download-list {
+    overflow: visible;
+}
+.download-list button.btn-refresh {
+    margin-left: 10px;
+}
+
+.download-list .icon-unpublish {
+    color:var(--danger);
+}
+
+.download-list div[role="tooltip"] {
+    display: none !important;
+}
+
+.download-list td[data-item = "payment_status"] > span {
+    padding:10px;
+}
+@media (max-width: 768px) {
+    .download-list {
+        overflow: auto;
+    }
+}
+
