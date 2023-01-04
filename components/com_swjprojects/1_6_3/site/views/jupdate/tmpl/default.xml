@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @package    SW JProjects Component
+  ~ @version    1.6.3
+  ~ @author Econsult Lab.
+  ~ @based on   SW JProjects Septdir Workshop - www.septdir.com
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru
+  -->
+
+<metadata>
+	<layout title="COM_SWJPROJECTS_VIEW_JUPDATE" option="COM_SWJPROJECTS_VIEW_JUPDATE_DEFAULT_OPTION">
+		<message>
+			<![CDATA[COM_SWJPROJECTS_VIEW_JUPDATE_DESCRIPTION]]>
+		</message>
+	</layout>
+	<fields name="request" addfieldpath="/administrator/components/com_swjprojects/models/fields">
+		<fieldset name="request">
+			<fieldset name="request"/>
+		</fieldset>
+	</fields>
+</metadata>

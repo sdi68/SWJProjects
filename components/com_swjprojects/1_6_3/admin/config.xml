@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!--
+  ~ @package    SW JProjects Component
+  ~ @version    1.6.3
+  ~ @author Econsult Lab.
+  ~ @based on   SW JProjects Septdir Workshop - www.septdir.com
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru
+  -->
+
+<config>
+	<fieldset name="global" label="JGLOBAL_FIELDSET_OPTIONS">
+		<field name="sef_advanced" type="hidden" default="1"/>
+		<field name="donate_counter" type="hidden" default="0"/>
+		<field name="files_folder" type="text"
+			   label="COM_SWJPROJECTS_PARAMS_FILES_FOLDER"
+			   description="COM_SWJPROJECTS_PARAMS_FILES_FOLDER_DESC"
+			   class="input-xxlarge"/>
+		<field name="images_folder" type="text"
+			   label="COM_SWJPROJECTS_PARAMS_IMAGES_FOLDER"
+			   description="COM_SWJPROJECTS_PARAMS_IMAGES_FOLDER_DESC"
+			   class="input-xxlarge"/>
+		<field name="projects_limit" type="integer"
+			   label="COM_SWJPROJECTS_PARAMS_PROJECTS_LIMIT"
+			   first="1" last="100" step="1" default="10"
+		>
+			<option value="0">JALL</option>
+		</field>
+		<field name="projects_layout" type="componentlayout"
+			   label="COM_SWJPROJECTS_PARAMS_PROJECTS_LAYOUT"
+			   extension="com_swjprojects"
+			   view="projects"
+			   class="form-select"/>
+		<field name="project_layout" type="componentlayout"
+			   label="COM_SWJPROJECTS_PARAMS_PROJECT_LAYOUT"
+			   extension="com_swjprojects"
+			   view="project"
+			   class="form-select"/>
+		<field name="versions_limit" type="integer"
+			   label="COM_SWJPROJECTS_PARAMS_VERSIONS_LIMIT"
+			   first="1" last="100" step="1" default="10">
+			<option value="0">JALL</option>
+		</field>
+		<field name="versions_layout" type="componentlayout"
+			   label="COM_SWJPROJECTS_PARAMS_VERSIONS_LAYOUT"
+			   extension="com_swjprojects"
+			   view="versions"
+			   class="form-select"/>
+		<field name="version_layout" type="componentlayout"
+			   label="COM_SWJPROJECTS_PARAMS_VERSION_LAYOUT"
+			   extension="com_swjprojects"
+			   view="version"
+			   class="form-select"/>
+		<field name="documentation_layout" type="componentlayout"
+			   label="com_swjprojects_params_documentation_layout"
+			   extension="com_swjprojects"
+			   view="documentation"
+			   class="form-select"/>
+		<field name="document_layout" type="componentlayout"
+			   label="COM_SWJPROJECTS_PARAMS_DOCUMENT_LAYOUT"
+			   extension="com_swjprojects"
+			   view="document"
+			   class="form-select"/>
+		<field name="documentation_limit" type="list"
+			   label="COM_SWJPROJECTS_PARAMS_DOCUMENTATION_LIMIT"
+			   default="10">
+			<option value="5">J5</option>
+			<option value="10">J10</option>
+			<option value="15">J15</option>
+			<option value="20">J20</option>
+			<option value="25">J25</option>
+			<option value="30">J30</option>
+			<option value="50">J50</option>
+			<option value="100">J100</option>
+			<option value="0">JALL</option>
+		</field>
+		<field name="jupdate_cachetimeout" type="integer"
+			   label="COM_SWJPROJECTS_PARAMS_JUPDATE_CACHETIMEOUT"
+			   description="COM_SWJPROJECTS_PARAMS_JUPDATE_CACHETIMEOUT_DESC"
+			   first="0"
+			   last="24"
+			   step="1"
+			   default="0"/>
+		<field name="duplicates_protection" type="radio"
+			   label="COM_SWJPROJECTS_PARAMS_DUPLICATES_PROTECTION"
+			   default="1"
+			   class="btn-group btn-group-yesno">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+	</fieldset>
+	<fieldset name="keys" label="COM_SWJPROJECTS_PARAMS_KEYS"
+			  addfieldpath="/administrator/components/com_swjprojects/models/fields">
+		<field name="key_length" type="list"
+			   label="COM_SWJPROJECTS_PARAMS_KEY_LENGTH"
+			   description="COM_SWJPROJECTS_PARAMS_KEY_LENGTH_DESC"
+			   default="16">
+			<option value="8">8</option>
+			<option value="16">16</option>
+			<option value="32">32</option>
+			<option value="64">64</option>
+		</field>
+		<field name="key_characters" type="textarea"
+			   label="COM_SWJPROJECTS_PARAMS_KEY_CHARACTERS"
+			   description="COM_SWJPROJECTS_PARAMS_KEY_CHARACTERS_DESC"
+			   default=""
+			   rows="3"
+			   class="input-xxlarge"/>
+		<field name="key_master" type="key"
+			   label="COM_SWJPROJECTS_PARAMS_KEY_MASTER"
+			   description="COM_SWJPROJECTS_PARAMS_KEY_MASTER_DESC"
+			   default=""
+			   length="128"
+			   class="input-xxlarge"/>
+	</fieldset>
+	<fieldset name="permissions"
+			  label="JCONFIG_PERMISSIONS_LABEL"
+			  description="JCONFIG_PERMISSIONS_DESC">
+		<field name="rules" type="rules"
+			   label="JCONFIG_PERMISSIONS_LABEL"
+			   class="inputbox"
+			   validate="rules"
+			   filter="rules"
+			   component="com_swjprojects"
+			   section="component"/>
+	</fieldset>
+</config>

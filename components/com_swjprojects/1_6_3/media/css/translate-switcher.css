@@ -1,0 +1,25 @@
+/*
+ * @package    SW JProjects Component
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ * @link       https://econsultlab.ru
+ */
+
+#toolbar #toolbar-translate-switcher {
+	float: right;
+}
+
+#toolbar #toolbar-translate-switcher .btn {
+	margin-right: 0;
+	min-width: unset;
+}
+
+#toolbar #toolbar-translate-switcher .btn.active {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	color: #fff;
+	background-color: #2384d3;
+	cursor: unset;
+}
