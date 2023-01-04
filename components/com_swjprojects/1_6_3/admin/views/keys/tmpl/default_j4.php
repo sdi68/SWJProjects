@@ -19,13 +19,21 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\Utilities\ArrayHelper;
 
+/**
+ * @var array $items
+ */
+
 HTMLHelper::stylesheet('com_swjprojects/admin-j4.min.css', array('key' => 'auto', 'relative' => true));
 
 $user      = Factory::getUser();
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 
-$columns = 9;
+/** @var SWJProjectsModelKeys $keys */
+$keys = $this->_models['keys'];
+
+$columns = 9 + count($keys->extra_headers);
+
 ?>
 <form action="<?php echo Route::_('index.php?option=com_swjprojects&view=keys'); ?>" method="post"
 	  name="adminForm" id="adminForm" class="clearfix">
@@ -53,6 +61,11 @@ $columns = 9;
 							<th scope="col">
 								<?php echo Text::_('COM_SWJPROJECTS_KEY'); ?>
 							</th>
+                            <?php foreach ($keys->extra_headers as $th):?>
+                            <th scope="col">
+                                <?php echo $this->escape($th); ?>
+                            </th>
+                            <?php endforeach; ?>
 							<th scope="col" class="w-10 d-none d-md-table-cell">
 								<?php echo HTMLHelper::_('searchtools.sort', 'COM_SWJPROJECTS_ORDER',
 									'k.order', $listDirn, $listOrder); ?>
@@ -107,6 +120,19 @@ $columns = 9;
 										<strong><?php echo $this->escape($item->key); ?></strong>
 									</a>
 								</td>
+                                <?php
+                                if(isset($item->extra) && count($item->extra)) {
+								foreach($item->extra as $extra){
+                                    if(is_array($extra)) {
+                                           ?>
+                                <td class = "extra">
+                                    <div class = "<?php echo $extra['class']??'alert alert-info'; ?>"><?php echo $extra['td']?? Text::_('JUNDEFINED'); ?></div>
+                                </td>
+                                          <?php
+                                    }
+								}
+								}
+                                ?>
 								<td class="d-none d-md-table-cell">
 									<?php echo $item->order; ?>
 								</td>

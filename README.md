@@ -37,3 +37,21 @@ Developers who create extensions for Joomla! CMS are provided with additional fu
 *Included in package*
 * [JLSitemap integration plugin](https://www.septdir.com/solutions/joomla/plugins/jlsitemap-swjprojects)  
 *Downloaded separately*
+
+## Add in the fork
+### Optimization code
+### Payment plugins packet
+* **Integration plugin**
+*Add payment settings tab in component settings*
+*Show payment status in keys list*  
+* **Payment method plugins**
+*Integration with payment services providers (included YooKassa)*
+* **Task plugin**
+*Automatic scheduled deleting uncompleted orders*
+
+### Modules
+* **Favorite projects module**
+*Show favorite projects in different places*
+*Included carousel templates*
+* **Download module**
+*Show allowed to download projects by the current user* 

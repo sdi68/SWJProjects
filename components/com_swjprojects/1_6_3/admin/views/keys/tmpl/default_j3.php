@@ -26,7 +26,11 @@ $user      = Factory::getUser();
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 
-$columns = 9;
+/** @var SWJProjectsModelKeys $keys */
+$keys = $this->_models['keys'];
+
+$columns = 9 + count($keys->extra_headers);
+
 ?>
 <form action="<?php echo Route::_('index.php?option=com_swjprojects&view=keys'); ?>" method="post"
 	  name="adminForm" id="adminForm">
@@ -52,6 +56,11 @@ $columns = 9;
 					<th class="nowrap">
 						<?php echo Text::_('COM_SWJPROJECTS_KEY'); ?>
 					</th>
+                    <?php foreach ($keys->extra_headers as $th):?>
+                        <th class="nowrap">
+                            <?php echo $this->escape($th); ?>
+                        </th>
+                    <?php endforeach; ?>
 					<th class="nowrap">
 						<?php echo HTMLHelper::_('searchtools.sort', 'COM_SWJPROJECTS_ORDER', 'k.order',
 							$listDirn, $listOrder); ?>
@@ -109,6 +118,19 @@ $columns = 9;
 								<?php endif; ?>
 							</div>
 						</td>
+                        <?php
+                        if(isset($item->extra) && count($item->extra)) {
+                            foreach($item->extra as $extra){
+                                if(is_array($extra)) {
+                                    ?>
+                                    <td class = "nowrap extra">
+                                        <div class = "<?php echo $extra['class']??'alert alert-info'; ?>"><?php echo $extra['td']?? Text::_('JUNDEFINED'); ?></div>
+                                    </td>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
 						<td class="nowrap">
 							<?php echo $item->order; ?>
 						</td>

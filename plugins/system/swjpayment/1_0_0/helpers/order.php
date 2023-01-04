@@ -10,6 +10,7 @@
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Table\Table;
 
@@ -267,5 +268,34 @@ class SWJPaymentOrderHelper
         }
         return false;
     }
+
+	/**
+	 * Формирует доп. поле статуса оплаты для списка ключей
+	 * @param   string  $order_number
+	 *
+	 * @return array
+	 *
+	 * @since 1.0.0
+	 */
+	public static function getOrderPaymentData(string $order_number): array
+	{
+		$order = self::getOrderByOrderNumber($order_number);
+		if(isset($order->extra) && isset($order->extra->payment_status))
+		{
+			$status = $order->extra->payment_status;
+			$out['td']    = SWJPaymentStatuses::getEnumNameText($status);
+			$out['class'] = match ($status)
+			{
+				SWJPaymentStatuses::SWJPAYMENT_STATUS_PENDING => "alert alert-warning",
+				SWJPaymentStatuses::SWJPAYMENT_STATUS_CONFIRMED => "alert alert-success",
+				default => "alert-danger",
+			};
+		} else {
+			$out['td']    = Text::_('PLG_SYSTEM_SWJPAYMENT_PAYMENT_FREE_OF_CHARGE');
+			$out['class'] = "alert alert-success";
+		}
+		$out['th'] = Text::_("PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_PAYMENT_STATUS");
+		return $out;
+	}
 
 }

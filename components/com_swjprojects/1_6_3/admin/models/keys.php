@@ -12,8 +12,10 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\Utilities\ArrayHelper;
 
 class SWJProjectsModelKeys extends ListModel
@@ -46,10 +48,19 @@ class SWJProjectsModelKeys extends ListModel
 	protected $_projects = null;
 
 	/**
+	 * Дополнительные поля ключа
+	 *
+	 * @var array
+	 * @since 1.6.3
+	 */
+	public $extra_headers = array();
+
+	/**
 	 * Constructor.
 	 *
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
+	 * @throws Exception
 	 * @since  1.3.0
 	 */
 	public function __construct($config = array())
@@ -227,6 +238,18 @@ class SWJProjectsModelKeys extends ListModel
 
 				// Mask key
 				$item->key = SWJProjectsHelperKeys::maskKey($item->key);
+
+				// Получаем дополнительные поля из плагинов
+				PluginHelper::importPlugin('system');
+				$item->extra = array(); // Контейнер для доп полей
+				$th = array(); // Заголовки дополнительных полей из плагинов
+				$results = Factory::getApplication()->triggerEvent('onGetKeyExtra', array('com_swjprojects.keys',&$item,&$th));
+				foreach ($th as $v) {
+					if(!in_array($v,$this->extra_headers)) {
+						$this->extra_headers[]= $v;
+					}
+				}
+
 			}
 		}
 

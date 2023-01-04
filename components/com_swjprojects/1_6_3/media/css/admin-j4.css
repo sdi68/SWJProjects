@@ -31,3 +31,6 @@
 .subhead #toolbar.btn-toolbar a[target=_blank]:before {
 	content: '';
 }
+td.extra > .alert {
+	margin: 0;
+}
