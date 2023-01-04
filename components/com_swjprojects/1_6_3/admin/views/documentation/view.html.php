@@ -1,6 +1,19 @@
 <?php
 /*
  * @package    SW JProjects Component
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ * @link       https://econsultlab.ru
+ */
+
+defined('_JEXEC') or die;
+
+
+/**
+ * @package    SW JProjects Component
  * @version    __DEPLOY_VERSION__
  * @author     Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.
@@ -19,23 +32,23 @@ use Joomla\CMS\Toolbar\Toolbar;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Version;
 
-class SWJProjectsViewVersions extends HtmlView
+class SWJProjectsViewDocumentation extends HtmlView
 {
 	/**
 	 * Model state variables.
 	 *
 	 * @var  Joomla\CMS\Object\CMSObject
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $state;
 
 	/**
-	 * Versions array.
+	 * Documents array
 	 *
 	 * @var  array
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $items;
 
@@ -44,7 +57,7 @@ class SWJProjectsViewVersions extends HtmlView
 	 *
 	 * @var  Pagination
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $pagination;
 
@@ -53,7 +66,7 @@ class SWJProjectsViewVersions extends HtmlView
 	 *
 	 * @var  Form
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	public $filterForm;
 
@@ -62,7 +75,7 @@ class SWJProjectsViewVersions extends HtmlView
 	 *
 	 * @var  array
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	public $activeFilters;
 
@@ -71,7 +84,7 @@ class SWJProjectsViewVersions extends HtmlView
 	 *
 	 * @var  string
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	public $sidebar;
 
@@ -84,7 +97,7 @@ class SWJProjectsViewVersions extends HtmlView
 	 *
 	 * @return  mixed  A string if successful, otherwise an Error object.
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	public function display($tpl = null)
 	{
@@ -98,7 +111,7 @@ class SWJProjectsViewVersions extends HtmlView
 		$this->addToolbar();
 
 		// Prepare sidebar
-		SWJProjectsHelper::addSubmenu('versions');
+		SWJProjectsHelper::addSubmenu('documentation');
 		$this->sidebar = JHtmlSidebar::render();
 
 		// Check for errors
@@ -113,37 +126,37 @@ class SWJProjectsViewVersions extends HtmlView
 	/**
 	 * Add title and toolbar.
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected function addToolbar()
 	{
-		$canDo = SWJProjectsHelper::getActions('com_swjprojects', 'versions');
+		$canDo   = SWJProjectsHelper::getActions('com_swjprojects', 'documentation');
 		$toolbar = Toolbar::getInstance();
 
 		// Set page title
-		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . Text::_('COM_SWJPROJECTS_VERSIONS'), 'cube');
+		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . Text::_('COM_SWJPROJECTS_DOCUMENTATION'), 'cube');
 
 		// Add create button
 		if ($canDo->get('core.create'))
 		{
-			ToolbarHelper::addNew('version.add');
+			ToolbarHelper::addNew('document.add');
 		}
 
 		// Add publish & unpublish buttons
 		if ($canDo->get('core.edit.state'))
 		{
-			ToolbarHelper::publish('versions.publish', 'JTOOLBAR_PUBLISH', true);
-			ToolbarHelper::unpublish('versions.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			ToolbarHelper::publish('documentation.publish', 'JTOOLBAR_PUBLISH', true);
+			ToolbarHelper::unpublish('documentation.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 		}
 
 		// Add delete/trash buttons
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'versions.delete', 'JTOOLBAR_EMPTY_TRASH');
+			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'documentation.delete', 'JTOOLBAR_EMPTY_TRASH');
 		}
 		elseif ($canDo->get('core.edit.state'))
 		{
-			ToolbarHelper::trash('versions.trash');
+			ToolbarHelper::trash('documentation.trash');
 		}
 
 		// Add preferences button
@@ -151,18 +164,6 @@ class SWJProjectsViewVersions extends HtmlView
 		{
 			ToolbarHelper::preferences('com_swjprojects');
 		}
-
-		// Add support button
-		$link     = 'https://www.septdir.com/support#solution=SWJProjects';
-		$support = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_SUPPORT', 'icon' => 'support', 'new' => true));
-		$toolbar->appendButton('Custom', $support, 'support');
-
-		// Add donate button
-		$link     = 'https://www.septdir.com/donate#solution=swjprojects';
-		$donate = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_DONATE', 'icon' => 'heart', 'new' => true));
-		$toolbar->appendButton('Custom', $donate, 'donate');
 	}
 
 	/**
@@ -170,18 +171,16 @@ class SWJProjectsViewVersions extends HtmlView
 	 *
 	 * @return  array  Array containing the field name to sort by as the key and display text as value.
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected function getSortFields()
 	{
 		return [
-			'v.state'     => Text::_('JSTATUS'),
-			'v.id'        => Text::_('JGRID_HEADING_ID'),
-			'title'       => Text::_('JGLOBAL_TITLE'),
-			'p.element'   => Text::_('COM_SWJPROJECTS_ELEMENT'),
-			'v.version'   => Text::_('COM_SWJPROJECTS_VERSION'),
-			'v.tag'       => Text::_('COM_SWJPROJECTS_VERSION_TAG'),
-			'v.downloads' => Text::_('COM_SWJPROJECTS_STATISTICS_DOWNLOADS')
+			'd.state'       => Text::_('JSTATUS'),
+			'd.id'          => Text::_('JGRID_HEADING_ID'),
+			'd.title'       => Text::_('JGLOBAL_TITLE'),
+			'project_title' => Text::_('COM_SWJPROJECTS_PROJECT'),
+			'd.ordering'    => Text::_('JGRID_HEADING_ORDERING')
 		];
 	}
 }

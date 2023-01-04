@@ -1,6 +1,19 @@
 <?php
 /*
  * @package    SW JProjects Component
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ * @link       https://econsultlab.ru
+ */
+
+defined('_JEXEC') or die;
+
+
+/**
+ * @package    SW JProjects Component
  * @version    __DEPLOY_VERSION__
  * @author     Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.
@@ -20,14 +33,14 @@ use Joomla\CMS\Toolbar\Toolbar;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Version;
 
-class SWJProjectsViewVersion extends HtmlView
+class SWJProjectsViewDocument extends HtmlView
 {
 	/**
 	 * Model state variables.
 	 *
 	 * @var  Joomla\CMS\Object\CMSObject
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $state;
 
@@ -36,7 +49,7 @@ class SWJProjectsViewVersion extends HtmlView
 	 *
 	 * @var  Form
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $form;
 
@@ -45,16 +58,16 @@ class SWJProjectsViewVersion extends HtmlView
 	 *
 	 * @var  array
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $translateForms;
 
 	/**
-	 * Version object.
+	 * Document object.
 	 *
 	 * @var  object
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $item;
 
@@ -63,7 +76,7 @@ class SWJProjectsViewVersion extends HtmlView
 	 *
 	 * @var  object
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected $project;
 
@@ -76,7 +89,7 @@ class SWJProjectsViewVersion extends HtmlView
 	 *
 	 * @return  mixed  A string if successful, otherwise an Error object.
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	public function display($tpl = null)
 	{
@@ -86,23 +99,12 @@ class SWJProjectsViewVersion extends HtmlView
 		$this->item           = $this->get('Item');
 		$this->project        = $this->getModel()->getProject($this->form->getValue('project_id', '', 0));
 
-		// Check for errors
-		if (count($errors = $this->get('Errors')))
-		{
-			throw new Exception(implode('\n', $errors), 500);
-		}
-
-		// Prepare form
-		if (!$this->project || empty($this->project->joomla['type']))
-		{
-			$this->form->removeField('joomla_version', '');
-		}
 
 		if ((new Version())->isCompatible('4.0'))
 		{
 			Factory::getDocument()->addScriptDeclaration("function projectHasChanged(element) {
 				document.body.appendChild(document.createElement('joomla-core-loader'));
-				document.querySelector('input[name=task]').value = 'version.reload';
+				document.querySelector('input[name=task]').value = 'document.reload';
 				element.form.submit();
 			}");
 		}
@@ -111,11 +113,16 @@ class SWJProjectsViewVersion extends HtmlView
 			Factory::getDocument()->addScriptDeclaration("function projectHasChanged(element) {
 				var cat = jQuery(element);
 				Joomla.loadingLayer('show');
-				jQuery('input[name=task]').val('version.reload');
+				jQuery('input[name=task]').val('document.reload');
 				element.form.submit();
 			}");
 		}
 
+		// Check for errors
+		if (count($errors = $this->get('Errors')))
+		{
+			throw new Exception(implode('\n', $errors), 500);
+		}
 
 		// Add title and toolbar
 		$this->addToolbar();
@@ -128,76 +135,46 @@ class SWJProjectsViewVersion extends HtmlView
 	 *
 	 * @throws  Exception
 	 *
-	 * @since  1.0.0
+	 * @since  1.4.0
 	 */
 	protected function addToolbar()
 	{
-		$isNew     = ($this->item->id == 0);
-		$canDo     = SWJProjectsHelper::getActions('com_swjprojects', 'version', $this->item->id);
-		$toolbar   = Toolbar::getInstance();
+		$isNew   = ($this->item->id == 0);
+		$canDo   = SWJProjectsHelper::getActions('com_swjprojects', 'document', $this->item->id);
+		$toolbar = Toolbar::getInstance();
 
 		// Disable menu
 		Factory::getApplication()->input->set('hidemainmenu', true);
 
 		// Set page title
-		$title = ($isNew) ? Text::_('COM_SWJPROJECTS_VERSION_ADD') : Text::_('COM_SWJPROJECTS_VERSION_EDIT');
+		$title = ($isNew) ? Text::_('COM_SWJPROJECTS_DOCUMENT_ADD') : Text::_('COM_SWJPROJECTS_DOCUMENT_EDIT');
 		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . $title, 'cube');
 
 		// Add apply & save buttons
 		if ($canDo->get('core.edit'))
 		{
-			ToolbarHelper::apply('version.apply');
-			ToolbarHelper::save('version.save');
+			ToolbarHelper::apply('document.apply');
+			ToolbarHelper::save('document.save');
 		}
 
 		// Add save new button
 		if ($canDo->get('core.create'))
 		{
-			ToolbarHelper::save2new('version.save2new');
+			ToolbarHelper::save2new('document.save2new');
 		}
 
 		// Add cancel button
-		ToolbarHelper::cancel('version.cancel', 'JTOOLBAR_CLOSE');
-
-		// Add preview & download buttons
-		if ($this->item->id)
-		{
-			// Download button
-			if ($this->item->file)
-			{
-				$link = 'index.php?option=com_swjprojects&task=siteRedirect&page=download&debug=1&version_id='
-					. $this->item->id;
-				if ($this->project->download_type === 'paid')
-				{
-					$link .= '&download_key=' . ComponentHelper::getParams('com_swjprojects')->get('key_master');
-				}
-				$download = LayoutHelper::render('components.swjprojects.toolbar.link',
-					array('link' => $link, 'text' => 'COM_SWJPROJECTS_FILE_DOWNLOAD', 'icon' => 'download', 'new' => false));
-				$toolbar->appendButton('Custom', $download, 'download');
-			}
-		}
+		ToolbarHelper::cancel('document.cancel', 'JTOOLBAR_CLOSE');
 
 		// Add translate switcher
 		$switcher = LayoutHelper::render('components.swjprojects.translate.switcher');
 		$toolbar->appendButton('Custom', $switcher, 'translate-switcher');
 
-		// Add support button
-		$link    = 'https://www.septdir.com/support#solution=SWJProjects';
-		$support = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_SUPPORT', 'icon' => 'support', 'new' => true));
-		$toolbar->appendButton('Custom', $support, 'support');
-
-		// Add donate button
-		$link   = 'https://www.septdir.com/donate#solution=swjprojects';
-		$donate = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_DONATE', 'icon' => 'heart', 'new' => true));
-		$toolbar->appendButton('Custom', $donate, 'donate');
-
 		// Add preview button
 		if ($this->item->id)
 		{
 			// Preview button
-			$link    = 'index.php?option=com_swjprojects&task=siteRedirect&page=version&debug=1&id=' . $this->item->id
+			$link    = 'index.php?option=com_swjprojects&task=siteRedirect&page=document&debug=1&id=' . $this->item->id
 				. '&project_id=' . $this->project->id . '&catid=' . $this->project->catid;
 			$preview = LayoutHelper::render('components.swjprojects.toolbar.link',
 				array('link' => $link, 'text' => 'JGLOBAL_PREVIEW', 'icon' => 'eye'));

@@ -1,11 +1,12 @@
 <?php
 /*
  * @package    SW JProjects Component
- * @version    __DEPLOY_VERSION__
- * @author     Septdir Workshop - www.septdir.com
- * @copyright  Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://www.septdir.com/
+ * @link       https://econsultlab.ru
  */
 
 defined('_JEXEC') or die;
@@ -19,23 +20,23 @@ use Joomla\CMS\Toolbar\Toolbar;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Version;
 
-class SWJProjectsViewKeys extends HtmlView
+class SWJProjectsViewCategories extends HtmlView
 {
 	/**
 	 * Model state variables.
 	 *
 	 * @var  Joomla\CMS\Object\CMSObject
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	protected $state;
 
 	/**
-	 * Keys array.
+	 * Categories array.
 	 *
 	 * @var  array
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	protected $items;
 
@@ -44,7 +45,7 @@ class SWJProjectsViewKeys extends HtmlView
 	 *
 	 * @var  Pagination
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	protected $pagination;
 
@@ -53,7 +54,7 @@ class SWJProjectsViewKeys extends HtmlView
 	 *
 	 * @var  Form
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	public $filterForm;
 
@@ -62,7 +63,7 @@ class SWJProjectsViewKeys extends HtmlView
 	 *
 	 * @var  array
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	public $activeFilters;
 
@@ -71,9 +72,18 @@ class SWJProjectsViewKeys extends HtmlView
 	 *
 	 * @var  string
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	public $sidebar;
+
+	/**
+	 * Ordering divisions.
+	 *
+	 * @var  array
+	 *
+	 * @since  1.0.0
+	 */
+	public $ordering;
 
 	/**
 	 * Display the view.
@@ -84,7 +94,7 @@ class SWJProjectsViewKeys extends HtmlView
 	 *
 	 * @return  mixed  A string if successful, otherwise an Error object.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	public function display($tpl = null)
 	{
@@ -98,7 +108,7 @@ class SWJProjectsViewKeys extends HtmlView
 		$this->addToolbar();
 
 		// Prepare sidebar
-		SWJProjectsHelper::addSubmenu('keys');
+		SWJProjectsHelper::addSubmenu('categories');
 		$this->sidebar = JHtmlSidebar::render();
 
 		// Check for errors
@@ -107,43 +117,58 @@ class SWJProjectsViewKeys extends HtmlView
 			throw new Exception(implode('\n', $errors), 500);
 		}
 
+		// Preprocess the list of items to find ordering divisions
+		if (!empty($this->items))
+		{
+			foreach ($this->items as &$item)
+			{
+				$this->ordering[$item->parent_id][] = $item->id;
+			}
+		}
+
 		return parent::display($tpl);
 	}
 
 	/**
 	 * Add title and toolbar.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	protected function addToolbar()
 	{
-		$canDo   = SWJProjectsHelper::getActions('com_swjprojects', 'keys');
+		$canDo   = SWJProjectsHelper::getActions('com_swjprojects', 'categories');
 		$toolbar = Toolbar::getInstance();
 
 		// Set page title
-		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . Text::_('COM_SWJPROJECTS_KEYS'), 'cube');
+		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . Text::_('COM_SWJPROJECTS_CATEGORIES'), 'cube');
 
 		// Add create button
 		if ($canDo->get('core.create'))
 		{
-			ToolbarHelper::addNew('key.add');
+			ToolbarHelper::addNew('category.add');
 		}
 
 		// Add publish & unpublish buttons
 		if ($canDo->get('core.edit.state'))
 		{
-			ToolbarHelper::publish('keys.publish', 'JTOOLBAR_PUBLISH', true);
-			ToolbarHelper::unpublish('keys.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			ToolbarHelper::publish('categories.publish', 'JTOOLBAR_PUBLISH', true);
+			ToolbarHelper::unpublish('categories.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 		}
 
 		// Add delete/trash buttons
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'keys.delete', 'JTOOLBAR_EMPTY_TRASH');
+			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'categories.delete', 'JTOOLBAR_EMPTY_TRASH');
 		}
 		elseif ($canDo->get('core.edit.state'))
 		{
-			ToolbarHelper::trash('keys.trash');
+			ToolbarHelper::trash('categories.trash');
+		}
+
+		// Add rebuild button
+		if ($canDo->get('core.admin') || $canDo->get('core.options'))
+		{
+			ToolbarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
 		}
 
 		// Add preferences button
@@ -151,18 +176,6 @@ class SWJProjectsViewKeys extends HtmlView
 		{
 			ToolbarHelper::preferences('com_swjprojects');
 		}
-
-		// Add support button
-		$link    = 'https://www.septdir.com/support#solution=SWJProjects';
-		$support = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_SUPPORT', 'icon' => 'support', 'new' => true));
-		$toolbar->appendButton('Custom', $support, 'support');
-
-		// Add donate button
-		$link   = 'https://www.septdir.com/donate#solution=swjprojects';
-		$donate = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_DONATE', 'icon' => 'heart', 'new' => true));
-		$toolbar->appendButton('Custom', $donate, 'donate');
 	}
 
 	/**
@@ -170,16 +183,15 @@ class SWJProjectsViewKeys extends HtmlView
 	 *
 	 * @return  array  Array containing the field name to sort by as the key and display text as value.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	protected function getSortFields()
 	{
 		return [
-			'k.state'      => Text::_('JSTATUS'),
-			'k.id'         => Text::_('JGRID_HEADING_ID'),
-			'k.email'      => Text::_('JGLOBAL_EMAIL'),
-			'k.date_start' => Text::_('COM_SWJPROJECTS_DATE_START'),
-			'k.date_end'   => Text::_('COM_SWJPROJECTS_DATE_END'),
+			'с.state' => Text::_('JSTATUS'),
+			'с.id'    => Text::_('JGRID_HEADING_ID'),
+			'с.title' => Text::_('JGLOBAL_TITLE'),
+			'c.lft'   => Text::_('JGRID_HEADING_ORDERING')
 		];
 	}
 }

@@ -1,3 +1,10 @@
 .idea
-.phing
-.packages
+.git
+releases/
+dev/
+vendor
+composer.json
+build.xml
+composer.phar
+composer.lock!
+

@@ -1,11 +1,12 @@
 <?php
 /*
  * @package    SW JProjects Component
- * @version    __DEPLOY_VERSION__
- * @author     Septdir Workshop - www.septdir.com
- * @copyright  Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://www.septdir.com/
+ * @link       https://econsultlab.ru
  */
 
 defined('_JEXEC') or die;
@@ -19,7 +20,7 @@ use Joomla\CMS\Toolbar\Toolbar;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Version;
 
-class SWJProjectsViewCategories extends HtmlView
+class SWJProjectsViewVersions extends HtmlView
 {
 	/**
 	 * Model state variables.
@@ -31,7 +32,7 @@ class SWJProjectsViewCategories extends HtmlView
 	protected $state;
 
 	/**
-	 * Categories array.
+	 * Versions array.
 	 *
 	 * @var  array
 	 *
@@ -76,15 +77,6 @@ class SWJProjectsViewCategories extends HtmlView
 	public $sidebar;
 
 	/**
-	 * Ordering divisions.
-	 *
-	 * @var  array
-	 *
-	 * @since  1.0.0
-	 */
-	public $ordering;
-
-	/**
 	 * Display the view.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse.
@@ -107,22 +99,13 @@ class SWJProjectsViewCategories extends HtmlView
 		$this->addToolbar();
 
 		// Prepare sidebar
-		SWJProjectsHelper::addSubmenu('categories');
+		SWJProjectsHelper::addSubmenu('versions');
 		$this->sidebar = JHtmlSidebar::render();
 
 		// Check for errors
 		if (count($errors = $this->get('Errors')))
 		{
 			throw new Exception(implode('\n', $errors), 500);
-		}
-
-		// Preprocess the list of items to find ordering divisions
-		if (!empty($this->items))
-		{
-			foreach ($this->items as &$item)
-			{
-				$this->ordering[$item->parent_id][] = $item->id;
-			}
 		}
 
 		return parent::display($tpl);
@@ -135,39 +118,33 @@ class SWJProjectsViewCategories extends HtmlView
 	 */
 	protected function addToolbar()
 	{
-		$canDo   = SWJProjectsHelper::getActions('com_swjprojects', 'categories');
+		$canDo = SWJProjectsHelper::getActions('com_swjprojects', 'versions');
 		$toolbar = Toolbar::getInstance();
 
 		// Set page title
-		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . Text::_('COM_SWJPROJECTS_CATEGORIES'), 'cube');
+		ToolbarHelper::title(Text::_('COM_SWJPROJECTS') . ': ' . Text::_('COM_SWJPROJECTS_VERSIONS'), 'cube');
 
 		// Add create button
 		if ($canDo->get('core.create'))
 		{
-			ToolbarHelper::addNew('category.add');
+			ToolbarHelper::addNew('version.add');
 		}
 
 		// Add publish & unpublish buttons
 		if ($canDo->get('core.edit.state'))
 		{
-			ToolbarHelper::publish('categories.publish', 'JTOOLBAR_PUBLISH', true);
-			ToolbarHelper::unpublish('categories.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			ToolbarHelper::publish('versions.publish', 'JTOOLBAR_PUBLISH', true);
+			ToolbarHelper::unpublish('versions.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 		}
 
 		// Add delete/trash buttons
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'categories.delete', 'JTOOLBAR_EMPTY_TRASH');
+			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'versions.delete', 'JTOOLBAR_EMPTY_TRASH');
 		}
 		elseif ($canDo->get('core.edit.state'))
 		{
-			ToolbarHelper::trash('categories.trash');
-		}
-
-		// Add rebuild button
-		if ($canDo->get('core.admin') || $canDo->get('core.options'))
-		{
-			ToolbarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
+			ToolbarHelper::trash('versions.trash');
 		}
 
 		// Add preferences button
@@ -175,18 +152,6 @@ class SWJProjectsViewCategories extends HtmlView
 		{
 			ToolbarHelper::preferences('com_swjprojects');
 		}
-
-		// Add support button
-		$link    = 'https://www.septdir.com/support#solution=SWJProjects';
-		$support = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_SUPPORT', 'icon' => 'support', 'id' => 'toolbarSupport'));
-		$toolbar->appendButton('Custom', $support, 'support');
-
-		// Add donate button
-		$link   = 'https://www.septdir.com/donate#solution=swjprojects';
-		$donate = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_DONATE', 'icon' => 'heart', 'id' => 'toolbarSupport'));
-		$toolbar->appendButton('Custom', $donate, 'donate');
 	}
 
 	/**
@@ -199,10 +164,13 @@ class SWJProjectsViewCategories extends HtmlView
 	protected function getSortFields()
 	{
 		return [
-			'с.state' => Text::_('JSTATUS'),
-			'с.id'    => Text::_('JGRID_HEADING_ID'),
-			'с.title' => Text::_('JGLOBAL_TITLE'),
-			'c.lft'   => Text::_('JGRID_HEADING_ORDERING')
+			'v.state'     => Text::_('JSTATUS'),
+			'v.id'        => Text::_('JGRID_HEADING_ID'),
+			'title'       => Text::_('JGLOBAL_TITLE'),
+			'p.element'   => Text::_('COM_SWJPROJECTS_ELEMENT'),
+			'v.version'   => Text::_('COM_SWJPROJECTS_VERSION'),
+			'v.tag'       => Text::_('COM_SWJPROJECTS_VERSION_TAG'),
+			'v.downloads' => Text::_('COM_SWJPROJECTS_STATISTICS_DOWNLOADS')
 		];
 	}
 }

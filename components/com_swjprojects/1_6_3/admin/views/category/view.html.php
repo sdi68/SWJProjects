@@ -1,11 +1,12 @@
 <?php
 /*
  * @package    SW JProjects Component
- * @version    __DEPLOY_VERSION__
- * @author     Septdir Workshop - www.septdir.com
- * @copyright  Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://www.septdir.com/
+ * @link       https://econsultlab.ru
  */
 
 defined('_JEXEC') or die;
@@ -126,18 +127,6 @@ class SWJProjectsViewCategory extends HtmlView
 		// Add translate switcher
 		$switcher = LayoutHelper::render('components.swjprojects.translate.switcher');
 		$toolbar->appendButton('Custom', $switcher, 'translate-switcher');
-
-		// Add support button
-		$link     = 'https://www.septdir.com/support#solution=SWJProjects';
-		$support = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_SUPPORT', 'icon' => 'support', 'new' => true));
-		$toolbar->appendButton('Custom', $support, 'support');
-
-		// Add donate button
-		$link     = 'https://www.septdir.com/donate#solution=swjprojects';
-		$donate = LayoutHelper::render('components.swjprojects.toolbar.link',
-			array('link' => $link, 'text' => 'COM_SWJPROJECTS_DONATE', 'icon' => 'heart', 'new' => true));
-		$toolbar->appendButton('Custom', $donate, 'donate');
 
 		// Add preview button
 		if ($this->item->id)
