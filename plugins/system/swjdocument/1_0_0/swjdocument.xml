@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_SWJDOCUMENT</name>
+    <author>Econsult labs</author>
+    <creationDate>2022-12</creationDate>
+    <copyright>(C) 2022 ECL.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>info@econsultlab.ru</authorEmail>
+    <authorUrl>https://econsultlab.ru</authorUrl>
+    <version>1.0.0</version>
+    <description>PLG_SYSTEM_SWJDOCUMENT_XML_DESCRIPTION</description>
+
+    <!-- Scripts to run on installation -->
+    <scriptfile>script.php</scriptfile>
+
+    <media destination="plg_system_swjdocument" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+        <file>joomla.assets.json</file>
+    </media>
+
+    <files>
+        <filename plugin="swjdocument">swjdocument.php</filename>
+        <folder>sql</folder>
+        <folder>swjdocument</folder>
+        <folder>forms</folder>
+    </files>
+    <languages>
+        <language tag="ru-RU">language/ru-RU/plg_system_swjdocument.ini</language>
+        <language tag="ru-RU">language/ru-RU/plg_system_swjdocument.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+            </fieldset>
+        </fields>
+    </config>
+</extension>

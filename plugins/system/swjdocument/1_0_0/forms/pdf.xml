@@ -1,0 +1,22 @@
+<fieldset>
+    <field name="pdf"
+           type="file"
+           label="PLG_SYSTEM_SWJDOCUMENT_DOC_FILE_LABEL"
+           description="PLG_SYSTEM_SWJDOCUMENT_DOC_FILE_DESC"
+           size="10"
+           accept=".pdf"/>
+
+    <field name="selected_pdf"
+           type="text"
+           label="PLG_SYSTEM_SWJDOCUMENT_SELECTED_PDF_LABEL"
+           description="PLG_SYSTEM_SWJDOCUMENT_SELECTED_PDF_DESC"
+           readonly="true"
+           default=""/>
+    <field
+            name="delete_pdf"
+            type="checkbox"
+            label="PLG_SYSTEM_SWJDOCUMENT_DELETE_PDF_LABEL"
+            description="PLG_SYSTEM_SWJDOCUMENT_DELETE_PDF_DESC"
+            checked = "0"
+            value="1" />
+</fieldset>
