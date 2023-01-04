@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ @package    SW JProjects Payment
+  ~ @subpackage plugin task/swjpayment
+  ~ @version    1.0.0
+  ~ @author     Econsult lab - https://econsultlab.ru
+  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru/
+  -->
+
+<form>
+    <fields name="params">
+        <fieldset name="task_params">
+        </fieldset>
+    </fields>
+</form>
