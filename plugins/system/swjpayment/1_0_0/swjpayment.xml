@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @package    SW JProjects Payment
+  ~ @subpackage plugin system/swjprojects
+  ~ @version    1.0.0
+  ~ @author     Econsult lab - https://econsultlab.ru
+  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru/
+  -->
+
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_SWJPAYMENT</name>
+    <author>ECL</author>
+    <creationDate>27.11.2022</creationDate>
+    <copyright>(C) 2009-2022 Econsult Labs</copyright>
+    <authorEmail>info@econsultlab.ru</authorEmail>
+    <authorUrl>https://econsultlab.ru</authorUrl>
+    <license>https://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0.0</version>
+    <description>PLG_SYSTEM_SWJPAYMENT_XML_DESCRIPTION</description>
+
+    <scriptfile>script.php</scriptfile>
+
+    <!-- Language files -->
+    <languages folder="language">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_system_swjpayment.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_system_swjpayment.sys.ini</language>
+    </languages>
+
+    <media folder="media" destination="plg_swjpayment">
+        <folder>js</folder>
+        <folder>css</folder>
+        <folder>img</folder>
+        <folder>layouts</folder>
+        <file>index.html</file>
+        <file>joomla.assets.json</file>
+    </media>
+
+    <files>
+        <filename plugin="swjpayment">swjpayment.php</filename>
+        <folder>sql</folder>
+        <folder>classes</folder>
+        <folder>fields</folder>
+        <folder>forms</folder>
+        <folder>helpers</folder>
+        <folder>swjpayment</folder>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>LICENSE</filename>
+        <filename>script.php</filename>
+    </files>
+    <!-- Fields for Joomla 1.6.x and onwards -->
+    <config name="params">
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="logging"
+                       type="radio"
+                       default="0"
+                       class="btn-group"
+                       label="PLG_SYSTEM_SWJPAYMENT_LOGGING_LABEL"
+                       description="PLG_SYSTEM_SWJPAYMENT_LOGGING_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name = "common_note"
+                       type="note"
+                       class="alert alert-info"
+                       label = "PLG_SYSTEM_SWJPAYMENT_COMMON_NOTE_LABEL"
+                       description = "PLG_SYSTEM_SWJPAYMENT_COMMON_NOTE_DESC"
+                />
+                <field addfieldpath="plugins/system/swjpayment/fields"
+                       name="about"
+                       type="about"
+                       ext_page="/test"
+                       ext_doc="/doc"/>
+            </fieldset>
+        </fields>
+    </config>
+    <!-- Update servers -->
+    <updateservers>
+        <server type="extension" priority="1" name="swjpayment">
+            https://econsultlab.ru/uploads/joomla/plugins/system/swjpayment/update_swjpayment.xml
+        </server>
+    </updateservers>
+</extension>

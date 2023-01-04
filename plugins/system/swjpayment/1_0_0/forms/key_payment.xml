@@ -1,0 +1,46 @@
+<!--
+  ~ @package    SW JProjects Payment
+  ~ @subpackage plugin system/swjprojects
+  ~ @version    1.0.0
+  ~ @author     Econsult lab - https://econsultlab.ru
+  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru/
+  -->
+
+<fieldset name="payment_info" label="Информация по оплате заказа">
+    <field name="payment_info"
+           type="note"
+           label="PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_TITLE"
+    />
+    <field name="processor"
+           type="text"
+           label="PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_PROCESSOR"
+           default=""
+           disabled="true"
+    />
+    <field name="payment_status"
+           type="text"
+           label="PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_PAYMENT_STATUS"
+           default=""
+           disabled="true"
+    />
+    <field name="payment_received_date"
+           type="text"
+           label="PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_PAYMENT_RECEIVED_DATE"
+           default=""
+           disabled="true"
+    />
+    <field name="transaction_id"
+           type="text"
+           label="PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_TRANSACTION_ID"
+           default=""
+           disabled="true"
+    />
+    <field name="extra"
+           type="text"
+           label="PLG_SYSTEM_SWJPAYMENT_PAYMENT_INFO_EXTRA"
+           default=""
+           disabled="true"
+    />
+</fieldset>
