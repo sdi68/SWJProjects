@@ -1,11 +1,12 @@
 <?php
 /*
  * @package    SW JProjects Component
- * @version    __DEPLOY_VERSION__
- * @author     Septdir Workshop - www.septdir.com
- * @copyright  Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.
+ * @version    1.6.3
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://www.septdir.com/
+ * @link       https://econsultlab.ru
  */
 
 defined('_JEXEC') or die;
@@ -42,7 +43,7 @@ class SWJProjectsModelCategory extends AdminModel
 			$registry     = new Registry($item->params);
 			$item->params = $registry->toArray();
 
-			$item->translates = array();
+			$item->set('translates',array());
 			if (!empty($item->id))
 			{
 				$db    = $this->getDbo();
@@ -51,11 +52,11 @@ class SWJProjectsModelCategory extends AdminModel
 					->from('#__swjprojects_translate_categories')
 					->where('id = ' . $item->id);
 				$db->setQuery($query);
-				$item->translates = $db->loadObjectList('language');
+				$item->set('translates',$db->loadObjectList('language'));
 
-				if (!empty($item->translates))
+				if (!empty($item->get('translates','')))
 				{
-					foreach ($item->translates as &$translate)
+					foreach ($item->get('translates',array()) as &$translate)
 					{
 						// Convert the metadata field value to array
 						$registry            = new Registry($translate->metadata);
