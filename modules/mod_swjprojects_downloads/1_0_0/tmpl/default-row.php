@@ -22,11 +22,12 @@ $extra = "";
 $status_style = '';
 if ($item['key']->extra){
     $extra = $item['key']->extra;
-    $extra->payment_status = ($extra->payment_status ?? SWJPaymentStatuses::SWJPAYMENT_STATUS_CANCELED);
+    $extra->payment_status = ($extra->payment_status ?? '');
         $status_style = match ($extra->payment_status) {
             SWJPaymentStatuses::SWJPAYMENT_STATUS_CONFIRMED => 'alert-success',
             SWJPaymentStatuses::SWJPAYMENT_STATUS_PENDING => 'alert-warning',
-            default => '',
+            SWJPaymentStatuses::SWJPAYMENT_STATUS_CANCELED => 'alert-danger',
+            default => 'alert-info',
         };
 }
 
