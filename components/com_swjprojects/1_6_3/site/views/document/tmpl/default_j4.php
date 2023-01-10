@@ -17,6 +17,7 @@ use Joomla\CMS\Language\Text;
 
 ?>
 <div id="SWJProjects" class="document">
+<?php if(empty($this->item->alterDocument)): ?>
 	<div class="project info mb-3">
 		<div class="h1"><?php echo $this->project->title . ' - ' . Text::_('COM_SWJPROJECTS_DOCUMENTATION'); ?></div>
 		<div>
@@ -130,4 +131,8 @@ use Joomla\CMS\Language\Text;
 			</div>
 		</div>
 	</div>
+<?php else: ?>
+    <div class="h1"><?php echo $this->project->title . ' - ' . Text::_('COM_SWJPROJECTS_DOCUMENTATION'); ?></div>
+    <?php echo $this->item->alterDocument; ?>
+<?php endif; ?>
 </div>

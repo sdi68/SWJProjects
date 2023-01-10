@@ -13,10 +13,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 HTMLHelper::stylesheet('com_swjprojects/site.min.css', array('version' => 'auto', 'relative' => true));
 ?>
 <div id="SWJProjects" class="document">
+<?php if(empty($this->item->alterDocument)): ?>
 	<?php if ($cover = $this->project->images->get('cover')): ?>
 		<p class="cover"><?php echo HTMLHelper::image($cover, $this->project->title); ?></p>
 		<hr>
@@ -29,4 +31,8 @@ HTMLHelper::stylesheet('com_swjprojects/site.min.css', array('version' => 'auto'
 			<p><?php echo nl2br($this->item->introtext); ?></p>
 		<?php endif; ?>
 	</div>
+<?php else: ?>
+    <div class="h1"><?php echo $this->project->title . ' - ' . Text::_('COM_SWJPROJECTS_DOCUMENTATION'); ?></div>
+	<?php echo $this->item->alterDocument; ?>
+<?php endif; ?>
 </div>

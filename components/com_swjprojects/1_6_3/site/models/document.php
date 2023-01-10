@@ -16,6 +16,7 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ItemModel;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
@@ -350,6 +351,12 @@ class SWJProjectsModelDocument extends ItemModel
 				}
 			}
 		}
+		// Получаем альтернативные представления документа
+		PluginHelper::importPlugin('system');
+		$html = '';
+		$results = Factory::getApplication()->triggerEvent('onGetAlternativeDocument', array('com_swjprojects.document', $this->_item[$pk], &$html));
+		if(!empty($html))
+			$this->_item[$pk]->alterDocument = $html;
 
 		return $this->_item[$pk];
 	}
