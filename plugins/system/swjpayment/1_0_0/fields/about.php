@@ -1,12 +1,12 @@
 <?php
 /*
- * @package    SW JProjects Payment
- * @subpackage plugin system/swjprojects
+ * @package    SW JProjects Component
+ * @subpackage    system/SWJPayment plugin
  * @version    1.0.0
- * @author     Econsult lab - https://econsultlab.ru
- * @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+ * @author Econsult Lab.
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://econsultlab.ru/
+ * @link       https://econsultlab.ru
  */
 
 // phpcs:disable PSR1.Files.SideEffects
@@ -112,24 +112,22 @@ class JFormFieldAbout extends JFormField
         if ((new Version())->isCompatible('4.0')) {
             $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
             $wr = $wa->getRegistry();
-            $wr->addRegistryFile('/media/plg_swjpayment/joomla.assets.json');
-            $wa->useStyle('plg_swjpayment.about');
+            $wr->addRegistryFile('/media/plg_system_swjpayment/joomla.assets.json');
+            $wa->useStyle('plg_system_swjpayment.about');
         } else {
             $doc = JFactory::getDocument();
-            $doc->addScript('/media/mod_swjprojects_favorites_projects/js/back.js');
-            $doc->addStyleSheet('/media/mod_swjprojects_favorites_projects/css/back.css');
-            $doc->addStyleSheet('/media/plg_swjpayment/css/about.css');
+            $doc->addStyleSheet('/media/plg_system_swjpayment/css/about.css');
         }
 
         if (empty($this->ext_image) || !file_exists($this->ext_image)) {
-            $this->ext_image = '/media/plg_swjpayment/img/logo.png';
+            $this->ext_image = '/media/plg_system_swjpayment/img/logo.png';
         }
 
         $info = simplexml_load_file(JPATH_SITE . "/plugins/system/swjpayment/swjpayment.xml");
 
         $html = "<div class = \"about-wrap\">";
         $html .= "<div class = \"about-img\">";
-        $html .= ('<img src = "/media/plg_swjpayment/img/logo.png"/>');
+        $html .= ('<img src = "/media/plg_system_swjpayment/img/logo.png"/>');
         $html .= "</div>";
         $html .= "<div class = \"about-intro\">";
         $html .= "<div class = \"about-title\">";

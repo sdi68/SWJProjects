@@ -1,12 +1,12 @@
 <?php
 /*
- * @package    SW JProjects Payment
- * @subpackage plugin system/swjprojects
+ * @package    SW JProjects Component
+ * @subpackage    system/SWJPayment plugin
  * @version    1.0.0
- * @author     Econsult lab - https://econsultlab.ru
- * @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+ * @author Econsult Lab.
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://econsultlab.ru/
+ * @link       https://econsultlab.ru
  */
 
 defined('_JEXEC') or die;
@@ -245,9 +245,9 @@ abstract class SWJPaymentPlugin extends CMSPlugin
 
         $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
         $wr = $wa->getRegistry();
-        $wr->addRegistryFile('/media/plg_swjpayment/joomla.assets.json');
-        $wa->useScript('plg_swjpayment.swjpayment');
-        $wa->useStyle('plg_swjpayment.swjpayment');
+        $wr->addRegistryFile('/media/plg_system_swjpayment/joomla.assets.json');
+        $wa->useScript('plg_system_swjpayment.swjpayment');
+        $wa->useStyle('plg_system_swjpayment.swjpayment');
 
         // Подключаем общий шаблон вывода выбора типа оплаты
         if (isset($vars->common_layout) && !empty($vars->common_layout)) {

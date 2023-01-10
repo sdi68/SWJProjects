@@ -1,5 +1,6 @@
 /*
  * @package    SW JProjects Component
+ * @subpackage    com_swjprojects
  * @version    1.6.3
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com

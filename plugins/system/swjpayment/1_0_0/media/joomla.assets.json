@@ -6,19 +6,19 @@
   "license": "GNU/GPL",
   "assets": [
     {
-      "name": "plg_swjpayment.about",
+      "name": "plg_system_swjpayment.about",
       "type": "style",
-      "uri": "plg_swjpayment/about.css"
+      "uri": "plg_system_swjpayment/about.css"
     },
     {
-      "name": "plg_swjpayment.swjpayment",
+      "name": "plg_system_swjpayment.swjpayment",
       "type": "style",
-      "uri": "plg_swjpayment/swjpayment.css"
+      "uri": "plg_system_swjpayment/swjpayment.css"
     },
     {
-      "name": "plg_swjpayment.swjpayment",
+      "name": "plg_system_swjpayment.swjpayment",
       "type": "script",
-      "uri": "plg_swjpayment/swjpayment.js"
+      "uri": "plg_system_swjpayment/swjpayment.js"
     }
   ]
 }

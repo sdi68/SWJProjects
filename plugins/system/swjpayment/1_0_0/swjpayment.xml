@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ @package    SW JProjects Payment
-  ~ @subpackage plugin system/swjprojects
+  ~ @package    SW JProjects Component
+  ~ @subpackage    system/SWJPayment plugin
   ~ @version    1.0.0
-  ~ @author     Econsult lab - https://econsultlab.ru
-  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @author Econsult Lab.
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
   ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
-  ~ @link       https://econsultlab.ru/
+  ~ @link       https://econsultlab.ru
   -->
 
 <extension version="3.0" type="plugin" group="system" method="upgrade">
@@ -28,7 +28,7 @@
         <language tag="ru-RU">ru-RU/ru-RU.plg_system_swjpayment.sys.ini</language>
     </languages>
 
-    <media folder="media" destination="plg_swjpayment">
+    <media folder="media" destination="plg_system_swjpayment">
         <folder>js</folder>
         <folder>css</folder>
         <folder>img</folder>
