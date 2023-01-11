@@ -87,6 +87,7 @@
 		<folder>images</folder>
 	</media>
 	<layouts destination="components/swjprojects" folder="layouts">
+		<folder>block</folder>
 		<folder>field</folder>
 		<folder>toolbar</folder>
 		<folder>translate</folder>
