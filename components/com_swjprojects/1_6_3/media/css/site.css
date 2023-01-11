@@ -21,3 +21,19 @@
 #SWJProjects.version .version.info .meta ul li:first-child {
 	padding-left: 0;
 }
+
+#sdiModal .sdi-galery {
+	max-width:1140px;
+	width: 90%;
+}
+
+#sdiModal .sdi-galery .modal-header {
+	padding: 15px;
+}
+
+@media (max-width: 768px) {
+	#SWJProjects .project-info {
+		order: 1;
+		margin-top:15px;
+	}
+}

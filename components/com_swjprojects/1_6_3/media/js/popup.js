@@ -10,85 +10,75 @@
  */
 
 document.addEventListener("DOMContentLoaded", function () {
-	let popups = document.querySelectorAll('[popup]');
-	if (popups) {
-		popups.forEach(function (element) {
-			//  Get url
-			let url = '';
-			if (element.getAttribute('href')) {
-				url = element.getAttribute('href');
-			} else if (element.getAttribute('popup')) {
-				url = element.getAttribute('popup');
-			}
+    let popups = document.querySelectorAll('[data-popup]');
+    if (popups) {
+        if (!document.getElementById('sdiModal')) {
+            // Инициализация модального окна
 
-			// Get name
-			let name = '';
-			if (element.getAttribute('title')) {
-				name = element.getAttribute('title');
-			} else if (element.getAttribute('data-title')) {
-				name = element.getAttribute('data-title');
-			} else if (element.getAttribute('data-name')) {
-				name = element.getAttribute('data-name');
-			}
+            const html = '<div class="modal fade" id="sdiModal" tabIndex="-1" aria-labelledby="sdiModalLabel" aria-hidden="true">' +
+                '<div class="modal-dialog modal-dialog-centered sdi-galery">' +
+                '<div class="modal-content">' +
+                '<div class="modal-header">' +
+                '<h5 class="modal-title" id="sdiModalLabel"></h5>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="' + Joomla.Text._('JCLOSE') + '"></button>' +
+                '</div>' +
+                '<div class="modal-body"></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
 
-			// Open popup
-			if (url) {
-				element.addEventListener('click', function (e) {
-					e.preventDefault();
-					return openPopup(url, name);
-				});
-			}
-		});
-	}
+            const sdiModal = document.createRange().createContextualFragment(html);
+
+            if (sdiModal) {
+                let bsModal = bootstrap.Modal.getInstance(sdiModal);
+
+                if (bsModal) {
+                    bsModal.dispose();
+                } // Append the modal before closing body tag
+                document.body.appendChild(sdiModal); // Modal was moved so it needs to be re initialised
+            }
+        }
+
+        popups.forEach(function (element) {
+            //  Get url
+            let url = '';
+            if (element.getAttribute('href')) {
+                url = element.getAttribute('href');
+            } else if (element.getAttribute('data-popup')) {
+                url = element.getAttribute('data-popup');
+            }
+
+            // Get name
+            let name = '';
+            if (element.getAttribute('title')) {
+                name = element.getAttribute('title');
+            } else if (element.getAttribute('data-title')) {
+                name = element.getAttribute('data-title');
+            } else if (element.getAttribute('data-name')) {
+                name = element.getAttribute('data-name');
+            }
+
+            // Open popup
+            if (url) {
+                element.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openPopup(url, name);
+                });
+            }
+        });
+    }
 });
 
-// Open popup
-let popupOpen = false,
-	popup = null;
-
 function openPopup(url, name) {
-	// Close popup
-	if (popupOpen) {
-		popup.close();
-	}
+    const modal = document.getElementById('sdiModal');
+    document.querySelector('#sdiModal #sdiModalLabel').innerHTML = name;
+    document.querySelector('#sdiModal .modal-body').innerHTML = '<img src = "' + url + '" alt = "' + name + '" />';
 
-	// Get winSize
-	let winSize = {width: 0, height: 0};
-	if (typeof (window.innerWidth) == 'number') {
-		winSize.width = window.innerWidth;
-		winSize.height = window.innerHeight;
-	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-		winSize.width = document.documentElement.clientWidth;
-		winSize.height = document.documentElement.clientHeight;
-	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-		winSize.width = document.body.clientWidth;
-		winSize.height = document.body.clientHeight;
-	}
-	winSize.width = (winSize.width.toFixed() * 1);
-	winSize.height = (winSize.height.toFixed() * 1);
-
-	// Get popup size
-	let size = {
-		width: ((winSize.width / 100 * 90).toFixed() * 1),
-		height: ((winSize.height / 100 * 90).toFixed() * 1)
-	};
-
-	// Get popup center
-	let center = {
-		width: (((winSize.width - size.width) / 2).toFixed() * 1),
-		height: (((winSize.height - size.height) / 2).toFixed() * 1)
-	};
-
-	// Open window
-	popup = window.open(
-		url,
-		name,
-		'width=' + size.width +
-		',height=' + size.height +
-		',left=' + center.width +
-		',top=' + center.height
-	);
-	popupOpen = true;
-
-	return popup;
+    if (window.bootstrap && window.bootstrap.Modal && !window.bootstrap.Modal.getInstance(modal)) {
+        Joomla.initialiseModal(modal, {
+            isJoomla: true
+        });
+    }
+    // Отображение модального окна
+    window.bootstrap.Modal.getInstance(modal).show();
 }
