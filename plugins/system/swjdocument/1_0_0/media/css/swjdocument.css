@@ -13,3 +13,11 @@
     height:800px;
     padding:15px;
 }
+
+@media (max-width: 768px) {
+    .pdf-frame {
+        width: 100%;
+        height:600px;
+        padding:15px 0;
+    }
+}
