@@ -16,6 +16,7 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ItemModel;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Table\Table;
 use Joomla\Registry\Registry;
@@ -161,9 +162,9 @@ class SWJProjectsModelProject extends ItemModel
 	 *
 	 * @param   integer  $pk  The id of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  object|boolean|Exception  Project object on success, false or exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -324,7 +325,8 @@ class SWJProjectsModelProject extends ItemModel
 				$data->download      = Route::_(SWJProjectsHelperRoute::getDownloadRoute(null, null, $data->element));
 				$data->documentation = (!$data->documentation) ? false :
 					Route::_(SWJProjectsHelperRoute::getDocumentationRoute($data->slug, $data->cslug));
-				if (!empty($data->urls->get('documentation'))) {
+				if (!empty($data->urls->get('documentation')))
+				{
 					$data->documentation = false;
 				}
 
@@ -341,6 +343,14 @@ class SWJProjectsModelProject extends ItemModel
 				$data->metadata = new Registry($data->metadata);
 				$data->metadata->set('image',
 					SWJProjectsHelperImages::getImage('projects', $data->id, 'meta', $data->language));
+
+				// SDI добавляем дополнительные данные из плагинов BOF
+				PluginHelper::importPlugin('system');
+				$html    = '';
+				$results = Factory::getApplication()->triggerEvent('onGetExtraData', array('com_swjprojects.project', $data, &$html));
+				if (!empty($html))
+					$data->extra = $html;
+				// SDI добавляем дополнительные данные из плагинов BOF
 
 				$this->_item[$pk] = $data;
 			}
@@ -366,9 +376,9 @@ class SWJProjectsModelProject extends ItemModel
 	 *
 	 * @param   integer  $pk  The id of the category.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  object|boolean|Exception  Category object on success, false or exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -466,9 +476,9 @@ class SWJProjectsModelProject extends ItemModel
 	 *
 	 * @param   integer  $pk  Optional primary key of the article to increment.
 	 *
-	 * @throws Exception
-	 *
 	 * @return  boolean  True if successful; false otherwise and internal error set.
+	 *
+	 * @throws Exception
 	 *
 	 * @since  1.1.0
 	 */
@@ -487,9 +497,9 @@ class SWJProjectsModelProject extends ItemModel
 	 *
 	 * @param   integer  $pk  The ids of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  array|boolean|Exception  Relations array on success, false or exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.1.0
 	 */
