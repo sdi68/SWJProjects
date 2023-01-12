@@ -165,7 +165,7 @@ class PlgSystemSWJDocument extends SWJPaymentPlugin
 		{
 			$data = (object) $data;
 		}
-		if (is_null($data->id) || $data->id == 0)
+		if (!method_exists($data,'id') || $data->id == 0)
 			return true;
 
 		switch (true)
