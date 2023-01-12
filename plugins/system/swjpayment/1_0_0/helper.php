@@ -11,8 +11,29 @@
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use Joomla\CMS\Table\Table;
 use Joomla\CMS\User\User;
 use Joomla\CMS\Version;
+
+if (!class_exists('SWJProjectsHelperRoute'))
+    require_once JPATH_ROOT . '/components/com_swjprojects/helpers/route.php';
+
+if (!class_exists('SWJPaymentStatuses'))
+    require_once JPATH_PLUGINS . '/system/swjpayment/classes/SWJPaymentStatuses.php';
+
+if (!class_exists('SWJPaymentOrderHelper'))
+    require_once JPATH_PLUGINS . '/system/swjpayment/helpers/order.php';
+
+if (!class_exists('SWJProjectsHelperTranslation'))
+    require_once JPATH_ADMINISTRATOR . '/components/com_swjprojects/helpers/translation.php';
+
+if (!class_exists('SWJProjectsHelperImages'))
+    require_once JPATH_ADMINISTRATOR . '/components/com_swjprojects/helpers/images.php';
+
+JLoader::register('SWJProjectsHelperKeys', JPATH_ADMINISTRATOR . '/components/com_swjprojects/helpers/keys.php');
+BaseDatabaseModel::addIncludePath(JPATH_ROOT . '/components/com_swjprojects/models');
+Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_swjprojects/tables');
 
 /**
  * @package pkg_swjprojects_payments
@@ -97,6 +118,41 @@ class SWJPaymentHelper
     public static function _getJoomlaVersionSuffix()
     {
         return ((new Version())->isCompatible('4.0')) ? '4' : '3';
+    }
+
+    /**
+     * Формирует данные по версиям проекта
+     * @param int $project_id Идентификатор проекта
+     * @param string $key Ключ скачивания
+     * @return array
+     * @since 1.0.0
+     */
+    public static function _prepareVersions(int $project_id, string $key): array
+    {
+        $versions = self::_getVersionsList($project_id);
+        foreach ($versions as $i => $version) {
+            $version->download_link = JUri::base() . SWJProjectsHelperRoute::getDownloadRoute(
+                    $version->id,
+                    $version->project_id,
+                    'paid_project',
+                    $key
+                );
+        }
+        return $versions;
+    }
+
+    /**
+     * Получает список версий продукта
+     * @param int $project_id
+     * @return mixed
+     * @since 1.0.0
+     */
+    private static function _getVersionsList(int $project_id)
+    {
+        /** @var  SWJProjectsModelVersions $model */
+        $model = BaseDatabaseModel::getInstance('Versions', 'SWJProjectsModel', ['ignore_request' => true]);
+        $model->setState('project.id', $project_id);
+        return $model->getItems();
     }
 
 }

@@ -226,36 +226,48 @@ class PlgSystemSWJPayment extends SWJPaymentPlugin
 	 * @throws Exception
 	 * @since 1.0.0
 	 */
-	public function onShowBuyBlock(string $context, object $item, string &$html): bool
+	public function onGetExtraData(string $context, object $item, string &$html): bool
 	{
 		switch (true)
 		{
 			case $this->_checkContext($context, self::_PROJECT_CONTEXT):
-				$html        .= (HTMLHelper::_('uitab.addTab', 'projectTab', 'payment', Text::_('PLG_SYSTEM_SWJPAYMENT_PAY_TAB')));
 				$paymentHTML = '';
-				$item_layout = $this->_buildLayoutPath('payment_item');
-				// Формируем номер заказа
-				$this->_setOrderNumber();
-				$vars               = new stdClass();
-				$vars->order_number = $this->_getOrderNumber();
-				PluginHelper::importPlugin('payment');
-				$results = Factory::getApplication()->triggerEvent('onShowPaymentHTML', array(self::_PROJECT_CONTEXT, $item, $item_layout, $vars->order_number, &$paymentHTML));
-				SWJPaymentHelper::getCurrentUserData($vars, $this->current_user);
-				if (!isset($vars->error))
+				$vars        = new stdClass();
+				$key         = SWJPaymentOrderHelper::hasUserProject($this->current_user->id, $item->id);
+				if (!empty($key))
 				{
-					if (!empty($paymentHTML))
-					{
-						$vars->html = $paymentHTML;
-					}
-					else
-					{
-						$vars->error = new Exception(Text::_('PLG_SYSTEM_SWJPAYMENT_PAYMENT_NOT_ACTIVATED'));
-					}
+					// У пользователя уже куплен этот компонент
+					$html           .= (HTMLHelper::_('uitab.addTab', 'projectTab', 'payment', Text::_('PLG_SYSTEM_SWJPAYMENT_DOWNLOAD_TAB')));
+					$vars->versions = SWJPaymentHelper::_prepareVersions($item->id, $key);
+					$vars->key      = $key;
+					$html           .= $this->_buildLayout($vars, 'noorder');
 				}
+				else
+				{
+					$html        .= (HTMLHelper::_('uitab.addTab', 'projectTab', 'payment', Text::_('PLG_SYSTEM_SWJPAYMENT_PAY_TAB')));
+					$item_layout = $this->_buildLayoutPath('payment_item');
+					// Формируем номер заказа
+					$this->_setOrderNumber();
+					$vars->order_number = $this->_getOrderNumber();
+					PluginHelper::importPlugin('payment');
+					$results = Factory::getApplication()->triggerEvent('onShowPaymentHTML', array(self::_PROJECT_CONTEXT, $item, $item_layout, $vars->order_number, &$paymentHTML));
+					SWJPaymentHelper::getCurrentUserData($vars, $this->current_user);
+					if (!isset($vars->error))
+					{
+						if (!empty($paymentHTML))
+						{
+							$vars->html = $paymentHTML;
+						}
+						else
+						{
+							$vars->error = new Exception(Text::_('PLG_SYSTEM_SWJPAYMENT_PAYMENT_NOT_ACTIVATED'));
+						}
+					}
 
-				$vars->item = $item;
-				$html       .= $this->_buildLayout($vars, 'payment_block');
-				$html       .= HTMLHelper::_('uitab.endTab');
+					$vars->item = $item;
+					$html       .= $this->_buildLayout($vars, 'payment_block');
+				}
+				$html .= HTMLHelper::_('uitab.endTab');
 
 				return true;
 			default:
