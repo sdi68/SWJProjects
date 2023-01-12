@@ -119,7 +119,7 @@ var SWJPayment = {
         _lockPane.id = "skm_LockPane";
         _lockPane.classList.add('LockOff');
         const _img = document.createElement('img');
-        _img.setAttribute('src', "/media/plg_swjpayment/img/loading.gif");
+        _img.setAttribute('src', "/media/plg_system_swjpayment/img/loading.gif");
         _loader.appendChild(_img);
         _loader.appendChild(_lockPane);
         let _body = document.getElementsByTagName("body")[0];
