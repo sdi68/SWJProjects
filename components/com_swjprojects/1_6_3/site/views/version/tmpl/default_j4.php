@@ -15,12 +15,18 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
-HTMLHelper::script('com_swjprojects/site.min.js', array('version' => 'auto', 'relative' => true));
+
+HTMLHelper::stylesheet('com_swjprojects/site.min.css', array('version' => 'auto', 'relative' => true));
+
 ?>
 <div id="SWJProjects" class="version">
     <?php echo LayoutHelper::render('components.swjprojects.block.title', array("project"=>$this->project,"category"=>$this->category,"title" =>mb_strtolower(Text::_('COM_SWJPROJECTS_VERSION')).' '.$this->version->version->version,"mb"=>3)); ?>
 	<div class="row mb-3">
-        <?php echo LayoutHelper::render('components.swjprojects.block.project', array("payment" => $this->version->payment,"project"=>$this->project,"version" => $this->version, "md"=>3)); ?>
+        <?php
+        $version = clone $this->version->version;
+        $version->link = $this->version->link;
+        echo LayoutHelper::render('components.swjprojects.block.project', array("payment" => $this->version->payment,"project"=>$this->project,"version" => $version, "md"=>3));
+        ?>
 		<div class="col-md-9">
             <?php echo LayoutHelper::render('components.swjprojects.block.buttons', array("project"=>$this->project,"mb"=>3)); ?>
 			<div class="card">
