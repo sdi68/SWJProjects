@@ -196,7 +196,7 @@ class PlgSystemSWJDocument extends SWJPaymentPlugin
 	 *
 	 * @since 1.0.0
 	 */
-	public function onContentAfterSave(string $context, Table $table, bool $isNew, array $data): bool
+	public function onContentAfterSave(string $context, Table $table, bool $isNew, array $data = null): bool
 	{
 		// загружаем язык плагина
 		$this->_loadExtraLanguageFiles();
