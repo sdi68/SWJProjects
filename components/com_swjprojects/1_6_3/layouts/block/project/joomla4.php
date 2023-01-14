@@ -44,7 +44,7 @@ extract($displayData);
                         </a>
                     </li>
                 <?php endif; ?>
-                <?php if (method_exists($project,'downloads') && $project->downloads): ?>
+                <?php if (property_exists($project,'downloads') && $project->downloads): ?>
                     <li>
                         <strong><?php echo Text::_('COM_SWJPROJECTS_STATISTICS_DOWNLOADS'); ?>: </strong>
                         <?php echo $project->downloads; ?>

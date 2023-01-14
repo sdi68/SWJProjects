@@ -159,13 +159,14 @@ class PlgSystemSWJDocument extends SWJPaymentPlugin
 	 */
 	public final function onContentPrepareData(string $context, $data): bool
 	{
+
 		// загружаем язык плагина
 		$this->_loadExtraLanguageFiles();
 		if (is_array($data))
 		{
 			$data = (object) $data;
 		}
-		if (!method_exists($data,'id') || $data->id == 0)
+		if (!property_exists($data,'id') || $data->id == 0)
 			return true;
 
 		switch (true)
@@ -175,7 +176,6 @@ class PlgSystemSWJDocument extends SWJPaymentPlugin
 				$pdf = SWJDocumentHelper::getPDF($data->id);
 				$this->_logging(array(sprintf('onContentPrepareData set selected_pdf = %s', $pdf)));
 				$data->selected_pdf = $pdf;
-
 				return true;
 			default:
 				return true;
