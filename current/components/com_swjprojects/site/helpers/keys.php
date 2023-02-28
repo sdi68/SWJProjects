@@ -71,16 +71,38 @@ class SWJProjectsHelperKeys
 				if (!empty($project_id)) $projects[] = 'FIND_IN_SET(' . $project_id . ', projects)';
 
 				// Build query
-				$query  = $db->getQuery(true)
-					->select(array('id'))
-					->from($db->quoteName('#__swjprojects_keys'))
-					->where('(' . implode(' OR ', $projects) . ')')
-					->where($db->quoteName('key') . ' = ' . $db->quote($key))
-					->where('state = 1')
-					->where('(date_start = ' . $nullDate . ' OR date_start <= ' . $nowDate . ')')
-					->where('(date_end = ' . $nullDate . ' OR date_end >= ' . $nowDate . ')')
-					->where('(' . $db->quoteName('limit') . ' = 0 OR limit_count > 0)');
-				$result = (int) $db->setQuery($query)->loadResult();
+//				$query  = $db->getQuery(true)
+//					->select(array('id'))
+//					->from($db->quoteName('#__swjprojects_keys'))
+//					->where('(' . implode(' OR ', $projects) . ')')
+//					->where($db->quoteName('key') . ' = ' . $db->quote($key))
+//					->where('state = 1')
+//					->where('(date_start = ' . $nullDate . ' OR date_start <= ' . $nowDate . ')')
+//					->where('(date_end = ' . $nullDate . ' OR date_end >= ' . $nowDate . ')')
+//					->where('(' . $db->quoteName('limit') . ' = 0 OR limit_count > 0)');
+//				$result = (int) $db->setQuery($query)->loadResult();
+
+                // SDI проверяем и по хеш ключа, т.к. в генерируемом xml в ссылке на скачивание публикуется хэш
+                $query  = $db->getQuery(true)
+                    ->select($db->quoteName('id'))
+                    ->select($db->quoteName('key'))
+                    ->from($db->quoteName('#__swjprojects_keys'))
+                    ->where('(' . implode(' OR ', $projects) . ')')
+                    ->where('state = 1')
+                    ->where('(date_start = ' . $nullDate . ' OR date_start <= ' . $nowDate . ')')
+                    ->where('(date_end = ' . $nullDate . ' OR date_end >= ' . $nowDate . ')')
+                    ->where('(' . $db->quoteName('limit') . ' = 0 OR limit_count > 0)');
+
+                $results = $db->setQuery($query)->loadAssocList();
+                $result = null;
+                foreach ($results as $v) {
+                    $tmp = md5($v['key'].'_'.$project_id);
+                    if($key == $v['key'] || $key == $tmp) {
+                        $result = $v['id'];
+                        break;
+                    }
+                }
+
 			}
 
 			self::$checkResults[$hash] = $result;

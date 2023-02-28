@@ -16,6 +16,18 @@ use Joomla\CMS\Helper\RouteHelper;
 
 class SWJProjectsHelperRoute extends RouteHelper
 {
+
+    public static function getTokenRoute(string $params):string {
+        $link = 'index.php?option=com_swjprojects&view=token';
+        $params = base64_decode($params);
+        $params = json_decode($params,true);
+        if(is_array($params)) {
+            $q = http_build_query($params);
+            $link .=('&'.$q);
+        }
+        return $link;
+    }
+
 	/**
 	 * Fetches jupdate route.
 	 *
