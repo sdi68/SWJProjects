@@ -53,6 +53,8 @@ class SWJProjectsController extends BaseController
 			$download_key = $this->input->get('download_key', '', 'raw');
 			$link         = false;
 
+
+
 			if ($view == 'version')
 			{
 				$link = SWJProjectsHelperRoute::getVersionRoute($id, $project_id, $catid);
@@ -89,7 +91,13 @@ class SWJProjectsController extends BaseController
 				$link = SWJProjectsHelperRoute::getJUpdateRoute($project_id, $element, $download_key);
 			}
 
-			if ($link)
+            if ($view == 'token')
+            {
+                $params = $this->input->get('params', '', 'raw');
+                $link = SWJProjectsHelperRoute::getTokenRoute($params);
+            }
+
+			if ($link && $view !== 'token')
 			{
 				$uri       = Uri::getInstance();
 				$root      = $uri->toString(array('scheme', 'host', 'port'));
@@ -119,9 +127,14 @@ class SWJProjectsController extends BaseController
 		}
 
 		// Cache
-		if ($view !== 'jupdate' && $view !== 'download' && $this->input->get('task') !== 'download')
+		if (($view !== 'jupdate' && $view !== 'download' && $this->input->get('task') !== 'download') || $view == 'token')
 		{
-			$cachable  = true;
+            if($view == 'token') {
+                $this->app->getDocument()->setType('json');
+                $cachable = false;
+            } else {
+                $cachable = true;
+            }
 			$urlparams = array(
 				'id'            => 'INT',
 				'catid'         => 'INT',

@@ -30,6 +30,7 @@
 		<file type="module" id="mod_swjprojects_projects" client="site">mod_swjprojects_projects.zip</file>
 		<file type="module" id="mod_swjprojects_versions" client="site">mod_swjprojects_versions.zip</file>
 		<file type="plugin" id="swjprojects" group = "system">plg_swjpayment.zip</file>
+		<file type="plugin" id="swjdocument" group = "system">plg_swjdocument.zip</file>
 		<file type="plugin" id="swjprojects_payment" group = "task">plg_swjprojects_payment.zip</file>
 		<file type="plugin" id="swjyookassa" group = "payment">plg_swjyookassa.zip</file>
 		<file type="plugin" id="swjdocument" group = "payment">plg_swjdocument.zip</file>

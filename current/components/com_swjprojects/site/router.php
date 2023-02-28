@@ -89,6 +89,10 @@ class SWJProjectsRouter extends RouterView
 		$download = new RouterViewConfiguration('download');
 		$this->registerView($download);
 
+        // Token route
+        $token = new RouterViewConfiguration('token');
+        $this->registerView($token);
+
 		parent::__construct($app, $menu);
 
 		$this->attachRule(new MenuRules($this));

@@ -97,4 +97,5 @@ current/plugins/*
 !current/plugins/task/swjprojects_payment/
 current/package/
 !current/package/*
-libraries/
+libraries/!/current/components/com_swjprojects/site/views/token/
+!/current/components/com_swjprojects/site/helpers/tokens.php
