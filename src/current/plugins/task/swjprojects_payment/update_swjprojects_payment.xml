@@ -1,0 +1,31 @@
+<!--
+  ~ @package    SW JProjects Component
+  ~ @subpackage    task/SWJProjects_payment plugin
+  ~ @version    1.0.0
+  ~ @author Econsult Lab.
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru
+  -->
+
+<updates>
+    <update>
+        <name>SWJProjects_payment task plugin v1.0.0</name>
+        <description>SWJProjects_payment task for com_swjprojects plugin update то v1.0.0</description>
+        <type>plugin</type>
+        <element>swjprojects_payment</element>
+        <folder>task</folder>
+        <client>0</client>
+        <version>1.0.0</version>
+        <infourl title="SWJProjects_payment task for com_swjprojects plugin update то v1.0.0">https://econsultlab.ru/extensions/joomla/packages/swjpayment</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">
+                https://econsultlab.ru/uploads/joomla/plugins/task/swjprojects_payment/plg_swjprojects_payment.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <targetplatform name="joomla" version="4" />
+        <php_minimum>8.0</php_minimum>
+    </update>
+</updates>
