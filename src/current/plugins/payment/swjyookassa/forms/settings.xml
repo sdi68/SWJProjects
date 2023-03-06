@@ -1,0 +1,135 @@
+<!--
+  ~ @package    SW JProjects Component
+  ~ @subpackage    payment/SWJYOOKassa plugin
+  ~ @version    1.0.0
+  ~ @author Econsult Lab.
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru
+  -->
+
+<form>
+    <fieldset>
+        <field name="shop_id"
+               required="true"
+               type="text"
+               size="20"
+               default=""
+               label="PLG_PAYMENT_SWJYOOKASSA_ACCOUNT"
+               description="PLG_PAYMENT_SWJYOOKASSA_ACCOUNT_DESC"
+        />
+        <field name="secretKey"
+               required="true"
+               type="password"
+               class="input-xxlarge"
+               default=""
+               label="PLG_PAYMENT_SWJYOOKASSA_PKEY"
+               description="PLG_PAYMENT_SWJYOOKASSA_PKEY_DESC"
+        />
+        <field name="notify_note"
+               type="note"
+               class=""
+               close="false"
+               label="PLG_PAYMENT_SWJYOOKASSA_NOTIFY_NOTE"
+               description="PLG_PAYMENT_SWJYOOKASSA_NOTIFY_NOTE_DESC"
+        />
+        <field type="text"
+               name="plugin_name"
+               default="ЮКасса"
+               class="input-xlarge"
+               size="20"
+               label="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_NAME"
+               description="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_NAME_DESC"
+        />
+        <field name="plugin_hidname"
+               type="hidden"
+               default="SWJYOOKASSA"
+        />
+        <field name="payment_note"
+               type="note"
+               class=""
+               close="false"
+               label="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_NOTE"
+               description="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_NOTE_DESC"
+        />
+        <field name="enable_recurring"
+               type="radio"
+               default="0"
+               class="btn-group"
+               readonly="true"
+               label="PLG_PAYMENT_SWJYOOKASSA_ENABLE_RECURRING"
+               description="PLG_PAYMENT_SWJYOOKASSA_ENABLE_RECURRING_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+        <field name="payment_method_type"
+               type="list"
+               default="bank_card"
+               multiple="true"
+               required="true"
+               label="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE"
+               description="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_DESC">
+            <option value="bank_card">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_BANK_CARD</option>
+            <option value="apple_pay">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_APPLE_PAY</option>
+            <option value="google_pay">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_GOOGLE_PAY</option>
+            <option value="yoo_money">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_YOO_MONEY</option>
+            <option value="qiwi">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_QIWI</option>
+            <option value="webmoney">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_WEBMONEY</option>
+            <option value="sberbank">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_SBER_ONLINE</option>
+            <option value="alfabank">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_ALFA_BANK</option>
+            <option value="tinkoff_bank">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_TINKOFF_BANK</option>
+            <option value="b2b_sberbank">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_SBER_B2B</option>
+            <option value="mobile_balance">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_MOBILE_BALANCE</option>
+            <option disabled = "true" value="cash">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_CASH</option>
+            <option  disabled = "true" value="installments">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_METHOD_TYPE_INSTALLMENTS</option>
+        </field>
+        <field name="payment_confirmation_type"
+               type="list"
+               default="0"
+               required="true"
+               label="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_CONFIRMATION"
+               description="PLG_PAYMENT_SWJYOOKASSA_PAYMENT_CONFIRMATION_DESC">
+            <option value="0">PLG_PAYMENT_SWJYOOKASSA_PAYMENT_CONFIRMATION_REDIRECT</option>
+        </field>
+        <field name="reciept_note"
+               type="note"
+               class=""
+               close="false"
+               label="PLG_PAYMENT_SWJYOOKASSA_RECEIPT_NOTE"
+               description="PLG_PAYMENT_SWJYOOKASSA_RECEIPT_NOTE_DESC"
+        />
+        <field name="tax_system_code"
+               type="list"
+               default="1"
+               required="true"
+               label="PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE"
+               description="PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE_DESC">
+            <option value="1">PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE1</option>
+            <option value="2">PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE2</option>
+            <option value="3">PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE3</option>
+            <option value="4">PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE4</option>
+            <option value="5">PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE5</option>
+            <option value="6">PLG_PAYMENT_SWJYOOKASSA_TAX_SYSTEM_CODE6</option>
+        </field>
+        <field name="vat_code"
+               type="list"
+               default="1"
+               required="true"
+               label="PLG_PAYMENT_SWJYOOKASSA_VAT_CODE"
+               description="PLG_PAYMENT_SWJYOOKASSA_VAT_CODE_DESC">
+            <option value="1">PLG_PAYMENT_SWJYOOKASSA_VAT_CODE1</option>
+            <option value="2">PLG_PAYMENT_SWJYOOKASSA_VAT_CODE2</option>
+            <option value="3">PLG_PAYMENT_SWJYOOKASSA_VAT_CODE3</option>
+            <option value="4">PLG_PAYMENT_SWJYOOKASSA_VAT_CODE4</option>
+            <option value="5">PLG_PAYMENT_SWJYOOKASSA_VAT_CODE5</option>
+            <option value="6">PLG_PAYMENT_SWJYOOKASSA_VAT_CODE6</option>
+        </field>
+
+        <field addfieldpath="/libraries/eclabs/fields/about"
+               name="@about"
+               type="ecl_about"
+               this_xml_path = "/plugins/payment/swjyookassa/swjyookassa.xml"
+               ext_page="/test"
+               ext_doc="/doc"/>
+    </fieldset>
+</form>
