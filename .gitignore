@@ -72,30 +72,13 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
-releases/
-dev/
-vendor
-composer.json
-build.xml
-composer.phar
-composer.lock
+/src/archive/
+/releases/
+/dev/
+/vendor/
+/src/current/eclabs/
+/composer.json
+/composer.phar
+/composer.lock
+/build.xml
 
-current/
-!current/components/
-!current/modules/
-!current/package/
-!current/plugins/
-!current/*
-current/components/
-!current/components/com_swjprojects/
-current/modules/
-!current/modules/*
-current/plugins/*
-!current/plugins/payment/swjyookassa/
-!current/plugins/system/swjdocument/
-!current/plugins/system/swjpayment/
-!current/plugins/task/swjprojects_payment/
-current/package/
-!current/package/*
-libraries/!/current/components/com_swjprojects/site/views/token/
-!/current/components/com_swjprojects/site/helpers/tokens.php
