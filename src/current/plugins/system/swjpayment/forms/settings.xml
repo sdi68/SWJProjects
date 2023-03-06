@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @package    SW JProjects Component
+  ~ @subpackage    system/SWJPayment plugin
+  ~ @version    1.0.0
+  ~ @author Econsult Lab.
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru
+  -->
+
+<form>
+<fieldset>
+    <field name = "payment_plugins"
+           type = "folderlist"
+           label = "PLG_SYSTEM_SWJPAYMENT_PLUGINS_LABEL"
+           description = "PLG_SYSTEM_SWJPAYMENT_PLUGINS_DESC"
+           directory = "/plugins/payment"
+           hide_default = "true"
+           multiple = "true"
+           />
+    <field name="logging"
+           type="radio"
+           default="0"
+           class="btn-group"
+           label="PLG_SYSTEM_SWJPAYMENT_LOGGING_LABEL"
+           description="PLG_SYSTEM_SWJPAYMENT_LOGGING_DESC">
+        <option value="1">JYES</option>
+        <option value="0">JNO</option>
+    </field>
+    <field name = "menuitem_return_success"
+           type="menuitem"
+           label = "PLG_SYSTEM_SWJPAYMENT_SUCCESS_RETURN_MENUITEM_LABEL"
+           description="PLG_SYSTEM_SWJPAYMENT_SUCCESS_RETURN_MENUITEM_DESC"
+           default = "" />
+    <field name = "menuitem_return_fail"
+           type="menuitem"
+           label = "PLG_SYSTEM_SWJPAYMENT_FAIL_RETURN_MENUITEM_LABEL"
+           description="PLG_SYSTEM_SWJPAYMENT_FAIL_RETURN_MENUITEM_DESC"
+           default = "" />
+    <field name = "common_note"
+           type="note"
+           class="alert alert-info"
+           label = "PLG_SYSTEM_SWJPAYMENT_COMMON_NOTE_LABEL"
+           description = "PLG_SYSTEM_SWJPAYMENT_COMMON_NOTE_DESC"
+    />
+    <field addfieldpath="/libraries/eclabs/fields/about"
+           name="@about"
+           type="ecl_about"
+           this_xml_path = "/plugins/system/swjpayment/swjpayment.xml"
+           ext_page="/test"
+           ext_doc="/doc"/>
+</fieldset>
+</form>

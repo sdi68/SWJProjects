@@ -1,0 +1,38 @@
+/*
+ * @package    SW JProjects Component
+ * @subpackage    system/SWJPayment plugin
+ * @version    1.0.0
+ * @author Econsult Lab.
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ * @link       https://econsultlab.ru
+ */
+
+.about-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--template-bg-dark);
+    color: var(--template-text-light);
+}
+
+.about-wrap > .about-img {
+    flex-shrink: 0;
+}
+
+.about-wrap .about-links {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.about-wrap .about-links > a {
+    color: var(--template-text-light);
+    padding: 0 5px
+}
+
+.about-wrap .about-links > a:not(:last-of-type) {
+    border-right: 1px solid var(--template-bg-light);
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @package    SW JProjects Component
+  ~ @subpackage    system/SWJDocument plugin
+  ~ @version    1.0.0
+  ~ @author Econsult Lab.
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+  ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+  ~ @link       https://econsultlab.ru
+  -->
+
+<form>
+    <fieldset>
+        <field name = "common_note"
+               type="note"
+               class="alert alert-info"
+               label = "PLG_SYSTEM_SWJDOCUMENT_COMMON_NOTE_LABEL"
+               description = "PLG_SYSTEM_SWJDOCUMENT_COMMON_NOTE_DESC"
+        />
+        <field addfieldpath="/libraries/eclabs/fields/about"
+               name="@about"
+               type="ecl_about"
+               this_xml_path = "/plugins/system/swjdocument/swjdocument.xml"
+               ext_page="/test"
+               ext_doc="/doc"/>
+    </fieldset>
+</form>

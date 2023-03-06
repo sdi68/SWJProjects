@@ -1,0 +1,24 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "swjpayment",
+  "version": "1.0.0",
+  "description": "Common payment gateway from SWJProjects",
+  "license": "GNU/GPL",
+  "assets": [
+    {
+      "name": "plg_system_swjpayment.about",
+      "type": "style",
+      "uri": "plg_system_swjpayment/about.css"
+    },
+    {
+      "name": "plg_system_swjpayment.swjpayment",
+      "type": "style",
+      "uri": "plg_system_swjpayment/swjpayment.css"
+    },
+    {
+      "name": "plg_system_swjpayment.swjpayment",
+      "type": "script",
+      "uri": "plg_system_swjpayment/swjpayment.js"
+    }
+  ]
+}
