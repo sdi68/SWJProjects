@@ -93,4 +93,9 @@
 		<folder>translate</folder>
 		<folder>message</folder>
 	</layouts>
+	<updateservers>
+		<server type="extension" priority="1" name="SW JProjects">
+			https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/components/com_swjprojects/update_com_swjprojects.xml
+		</server>
+	</updateservers>
 </extension>

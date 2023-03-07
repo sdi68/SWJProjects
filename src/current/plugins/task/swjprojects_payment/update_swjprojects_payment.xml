@@ -20,12 +20,11 @@
         <infourl title="SWJProjects_payment task for com_swjprojects plugin update то v1.0.0">https://econsultlab.ru/extensions/joomla/packages/swjpayment</infourl>
         <downloads>
             <downloadurl type="full" format="zip">
-                https://econsultlab.ru/uploads/joomla/plugins/task/swjprojects_payment/plg_swjprojects_payment.zip</downloadurl>
+                https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/plugins/task/swjprojects_payment/plg_swjprojects_payment.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
         </tags>
-        <targetplatform name="joomla" version="4" />
-        <php_minimum>8.0</php_minimum>
+        <targetplatform name="joomla" version="" />
     </update>
 </updates>

@@ -18,7 +18,7 @@
         <version>1.0.0</version>
         <infourl title="Module to view favorite projects by the SWJProjects v1.0.0">https://econsultlab.ru/extensions/joomla/packages/swjpayment</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://econsultlab.ru/uploads/joomla/modules/mod_swjprojects_favorites_projects/mod_swjprojects_favorites_projects.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/modules/mod_swjprojects_favorites_projects/mod_swjprojects_favorites_projects.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
