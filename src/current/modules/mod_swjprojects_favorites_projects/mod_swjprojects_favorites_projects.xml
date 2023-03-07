@@ -88,11 +88,13 @@
                     <option value="1">JGLOBAL_ORDER_DESCENDING</option>
                 </field>
 
-                <field addfieldpath="modules/mod_swjprojects_favorites_projects/fields"
+                <field addfieldpath="/libraries/eclabs/fields/about"
                        name="about"
                        type="about"
-                       ext_page="https://econsultlab.ru/extensions/joomla/packages/swjpayment"
-                       ext_doc="https://econsultlab.ru/extensions/joomla/packages/swjpayment"/>
+                       free_update = "true"
+                       this_xml_path = "/modules/mod_swjprojects_favorites_projects/mod_swjprojects_favorites_projects.xml"
+                       ext_page=""
+                       ext_doc=""/>
 
             </fieldset>
             <fieldset name="advanced">
@@ -123,7 +125,7 @@
     </config>
     <updateservers>
         <server type="extension" name="mod_swjprojects_favorites_projects">
-            https://econsultlab.ru/uploads/joomla/modules/mod_swjprojects_favorites_projects/update_mod_swjprojects_favorites_projects.xml
+            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/modules/mod_swjprojects_favorites_projects/update_mod_swjprojects_favorites_projects.xml
         </server>
     </updateservers>
 </extension>

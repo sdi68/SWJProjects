@@ -14,10 +14,11 @@
         <fieldset name="task_params">
             <field addfieldpath="/libraries/eclabs/fields/about"
                    name="@about"
-                   type="ecl_about"
+                   type="about"
+                   free_update = "true"
                    this_xml_path = "/plugins/task/swjprojects_payment/swjprojects_payment.xml"
-                   ext_page="/test"
-                   ext_doc="/doc"/>
+                   ext_page=""
+                   ext_doc=""/>
         </fieldset>
     </fields>
 </form>

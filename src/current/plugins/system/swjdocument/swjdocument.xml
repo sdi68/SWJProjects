@@ -45,4 +45,10 @@
             </fieldset>
         </fields>
     </config>
+    <!-- Update servers -->
+    <updateservers>
+        <server type="extension" priority="1" name="swjdocument">
+            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/plugins/system/swjdocument/update_swjdocument.xml
+        </server>
+    </updateservers>
 </extension>

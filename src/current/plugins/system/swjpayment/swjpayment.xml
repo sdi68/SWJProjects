@@ -41,7 +41,6 @@
         <filename plugin="swjpayment">swjpayment.php</filename>
         <folder>sql</folder>
         <folder>classes</folder>
-        <folder>fields</folder>
         <folder>forms</folder>
         <folder>helpers</folder>
         <folder>swjpayment</folder>
@@ -80,7 +79,7 @@
     <!-- Update servers -->
     <updateservers>
         <server type="extension" priority="1" name="swjpayment">
-            https://econsultlab.ru/uploads/joomla/plugins/system/swjpayment/update_swjpayment.xml
+            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/plugins/system/swjpayment/update_swjpayment.xml
         </server>
     </updateservers>
 </extension>
