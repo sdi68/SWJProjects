@@ -127,7 +127,7 @@
 
         <field addfieldpath="/libraries/eclabs/fields/about"
                name="@about"
-               type="about"
+               type="ecl_about"
                free_update = "true"
                this_xml_path = "/plugins/payment/swjyookassa/swjyookassa.xml"
                ext_page=""

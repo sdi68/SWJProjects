@@ -464,6 +464,7 @@ class PlgSystemSWJPayment extends SWJPaymentPlugin
 				{
 					// Заказ не оплачен
 					// Перенаправляем на страницу не удачной оплаты
+                    SWJPaymentOrderHelper::setOrderPaymentStatus($order_number,SWJPaymentStatuses::SWJPAYMENT_STATUS_CANCELED,$processor);
 					$u = Route::_("index.php?Itemid=" . $this->getPluginParam('menuitem_return_fail', ''));
 				}
 				$this->_logging(array("user_return redirect URL", $u));

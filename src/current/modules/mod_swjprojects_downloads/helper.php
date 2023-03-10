@@ -191,10 +191,11 @@ class modSwjProjectsDownloadsHelper
                 if(!is_null($extra->payment_status) && SWJPaymentStatuses::valueExists($extra->payment_status)) {
                     $order->extra->payment_status_title = SWJPaymentStatuses::getEnumNameText($extra->payment_status);
                 } else{
-                    $order->extra->payment_status_title = Text::_('COM_SWJPROJECTS_DOWNLOAD_TYPE_FREE');
+                    $order->extra->payment_status_title = Text::_('MOD_SWJPROJECTS_DOWNLOADS_ERROR_ORDER_PAYMENT');
                 }
             } else {
                 $order->extra = new stdClass();
+                $order->extra->payment_status = SWJPaymentStatuses::SWJPAYMENT_STATUS_FREE;
                 $order->extra->payment_status_title = Text::_('COM_SWJPROJECTS_DOWNLOAD_TYPE_FREE');
             }
             $item['key'] = $order;

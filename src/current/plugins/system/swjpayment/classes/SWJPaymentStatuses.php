@@ -45,11 +45,18 @@ class SWJPaymentStatuses extends AbstractEnum
      * @since 1.0.0
      */
     const SWJPAYMENT_STATUS_CANCELED = "E";
+
     /**
      * Статус запрета на оплату
      * @since 1.0.0
      */
     const SWJPAYMENT_STATUS_DENIED = "D";
+
+    /**
+     * Статус отсутствия оплаты, продукт бесплатен
+     * @since 1.0.0
+     */
+    const SWJPAYMENT_STATUS_FREE = "F";
 
     /**
      * Статусы, нуждающиеся в валидации

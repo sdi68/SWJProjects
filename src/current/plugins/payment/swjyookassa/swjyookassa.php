@@ -262,7 +262,7 @@ class PlgPaymentSWJYookassa extends SWJGatewayPlugin
             case 0:
                 $out['confirmation'] = array(
                     'type' => 'redirect',
-                    'return_url' => $vars->return_url,
+                    'return_url' => $vars->return_url.'&processor=swjyookassa',
                     'confirmation_url' => '',
                 );
                 break;

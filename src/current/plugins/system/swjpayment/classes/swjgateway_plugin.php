@@ -122,7 +122,8 @@ abstract class SWJGatewayPlugin extends SWJPaymentPlugin
         $vars->phone = $this->current_user->get('phone', '');
         $vars->user_fullname = $this->current_user->get('name', '');
         //$vars->return_url = URI::base() . 'index.php?option=com_ajax&plugin=swjpayment&format=json&action=delete_order&processor=swjyookassa&order_number=' . $vars->order_number;
-        $vars->return_url = URI::base() . 'index.php?option=com_ajax&plugin=swjpayment&format=json&action=user_return&processor=swjyookassa&order_number=' . $vars->order_number;
+        //$vars->return_url = URI::base() . 'index.php?option=com_ajax&plugin=swjpayment&format=json&action=user_return&processor=swjyookassa&order_number=' . $vars->order_number;
+        $vars->return_url = URI::base() . 'index.php?option=com_ajax&plugin=swjpayment&format=json&action=user_return&order_number=' . $vars->order_number;
     }
 
 

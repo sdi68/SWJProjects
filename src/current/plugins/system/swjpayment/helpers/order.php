@@ -372,4 +372,29 @@ class SWJPaymentOrderHelper
 		return $db->setQuery($query)->loadResult();
 	}
 
+    /**
+     * @param string $order_number
+     * @param string $payment_status
+     * @param string $processor
+     * @return bool
+     * @since 1.0.0
+     */
+    public static function setOrderPaymentStatus (string $order_number, string $payment_status, string $processor): bool
+    {
+        $order = self::getOrderByOrderNumber($order_number);
+
+        $db    = Factory::getDbo();
+        $query = $db->getQuery(true)
+            ->update($db->quoteName('#__swjprojects_order'));
+
+        if(is_null($order->processor)) {
+            $query->set($db->quoteName('processor') . ' = ' . $db->quote($processor));
+        }
+        $query->set($db->quoteName('payment_status') . ' = ' . $db->quote($payment_status))
+            ->where($db->quoteName('key_id') . ' IN (SELECT ' . $db->quoteName('id') . ' FROM ' . $db->quoteName('#__swjprojects_keys') .
+                ' WHERE ' . $db->quoteName('order') . ' = ' . $db->quote($order_number) . ')');
+        $db->setQuery($query);
+        return $db->execute();
+    }
+
 }

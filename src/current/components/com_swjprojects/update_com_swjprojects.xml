@@ -18,11 +18,11 @@
         <version>1.6.3</version>
         <infourl
                 title="com_swjprojects component v1.6.3">
-            https://econsultlab.ru/extensions/joomla/packages/swjpayment
+            https://econsultlab.ru/
         </infourl>
         <downloads>
             <downloadurl type="full" format="zip">
-                https://econsultlab.ru/uploads/joomla/packages/components/com_swjprojects/com_swjprojects.zip
+                https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/components/com_swjprojects/com_swjprojects.zip
             </downloadurl>
         </downloads>
         <tags>

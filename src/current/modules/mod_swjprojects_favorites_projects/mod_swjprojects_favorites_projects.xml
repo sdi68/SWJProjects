@@ -27,7 +27,6 @@
     </languages>
     <files>
         <filename module="mod_swjprojects_favorites_projects">mod_swjprojects_favorites_projects.php</filename>
-        <folder>fields</folder>
         <folder>tmpl</folder>
         <file>helper.php</file>
     </files>
@@ -90,7 +89,7 @@
 
                 <field addfieldpath="/libraries/eclabs/fields/about"
                        name="about"
-                       type="about"
+                       type="ecl_about"
                        free_update = "true"
                        this_xml_path = "/modules/mod_swjprojects_favorites_projects/mod_swjprojects_favorites_projects.xml"
                        ext_page=""

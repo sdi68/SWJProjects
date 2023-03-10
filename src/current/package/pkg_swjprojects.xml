@@ -40,7 +40,7 @@
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="SW JProjects">
-			https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/
+			https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/update_swjprojects.xml
 		</server>
 	</updateservers>
 </extension>

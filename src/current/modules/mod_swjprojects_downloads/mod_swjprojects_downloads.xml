@@ -42,7 +42,7 @@
             <fieldset name="basic" addfieldpath="administrator/components/com_swjprojects/models/fields">
                 <field addfieldpath="/libraries/eclabs/fields/about"
                        name="about"
-                       type="about"
+                       type="ecl_about"
                        free_update = "true"
                        this_xml_path = "/modules/mod_swjprojects_downloads/mod_swjprojects_downloads.xml"
                        ext_page=""

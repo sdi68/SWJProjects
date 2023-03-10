@@ -19,7 +19,7 @@
         />
         <field addfieldpath="/libraries/eclabs/fields/about"
                name="@about"
-               type="about"
+               type="ecl_about"
                free_update = "true"
                this_xml_path = "/plugins/system/swjdocument/swjdocument.xml"
                ext_page=""
