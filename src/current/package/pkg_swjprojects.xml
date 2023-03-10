@@ -12,13 +12,13 @@
 <extension version="3.9" type="package" method="upgrade">
 	<name>PKG_SWJPROJECTS</name>
 	<packagename>swjprojects</packagename>
-	<author>Septdir Workshop</author>
+	<author>ECL</author>
 	<creationDate>August 2022</creationDate>
-	<copyright>Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.</copyright>
+	<copyright>Copyright (c) 2018 - 2023 ECL forked on Septdir Workshop. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
-	<authorEmail>development@septdir.com</authorEmail>
-	<authorUrl>https://www.septdir.com/</authorUrl>
-	<version>1.6.2-dev</version>
+	<authorEmail>info@econsultlab.ru</authorEmail>
+	<authorUrl>https:econsultlab.ru/</authorUrl>
+	<version>1.0.0</version>
 	<description>PKG_SWJPROJECTS_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<languages folder="language">
