@@ -102,6 +102,7 @@ class SWJProjectsHelperTokens
         } else {
             // Ошибка. Нет проекта
             self::setError(ECLUpdateInfoStatus::ECLUPDATEINFO_STATUS_ERROR_MISSING_EXTENSION,$json);
+			return false;
         }
     }
 
