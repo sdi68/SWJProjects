@@ -36,7 +36,6 @@
 		<file type="plugin" id="swjdocument" group = "payment">plg_swjdocument.zip</file>
 		<file type="module" id="mod_swjprojects_favorites_projects" client="site">mod_swjprojects_favorites_projects.zip</file>
 		<file type="module" id="mod_swjprojects_downloads" client="site">mod_swjprojects_downloads.zip</file>
-		<file type="package" id="eclabs">pkg_eclabs.zip</file>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="SW JProjects">
