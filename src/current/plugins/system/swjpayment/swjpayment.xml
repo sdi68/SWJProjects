@@ -12,12 +12,12 @@
 <extension version="3.0" type="plugin" group="system" method="upgrade">
     <name>PLG_SYSTEM_SWJPAYMENT</name>
     <author>ECL</author>
-    <creationDate>27.11.2022</creationDate>
+    <creationDate>24.03.2023</creationDate>
     <copyright>(C) 2009-2022 Econsult Labs</copyright>
     <authorEmail>info@econsultlab.ru</authorEmail>
     <authorUrl>https://econsultlab.ru</authorUrl>
     <license>https://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>PLG_SYSTEM_SWJPAYMENT_XML_DESCRIPTION</description>
 
     <scriptfile>script.php</scriptfile>
