@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `#__swjprojects_order`
     `processor`             varchar(100) NOT NULL,
     `transaction_id`        varchar(100) NULL,
     `extra`                 text         NULL,
+    `amount`                float        NOT NULL,
     `payment_received_date` datetime     NULL,
     `payment_status`        varchar(50)  NULL,
     PRIMARY KEY `id` (`id`),

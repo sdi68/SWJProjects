@@ -46,6 +46,7 @@ class SWJPaymentOrderHelper
 			->set($db->quoteName('processor') . ' = ' . $db->quote($data['processor']))
 			->set($db->quoteName('transaction_id') . ' = ' . $db->quote($data['transaction_id']))
 			->set($db->quoteName('extra') . ' = ' . $db->quote($data['extra']))
+            ->set($db->quoteName('amount') . ' = ' . $db->quote($data['amount']))
 			->set($db->quoteName('payment_received_date') . ' = ' . $db->quote($data['payment_received_date']))
 			->set($db->quoteName('payment_status') . ' = ' . $db->quote($data['payment_status']))
 			->where($db->quoteName('key_id') . ' IN (SELECT ' . $db->quoteName('id') . ' FROM ' . $db->quoteName('#__swjprojects_keys') .
@@ -152,7 +153,8 @@ class SWJPaymentOrderHelper
 				'processor'             => '',
 				'transaction_id'        => '',
 				'payment_received_date' => '',
-				'extra'                 => '');
+				'extra'                 => '',
+                'amount'                 => $order_data['amount']);
 			self::_createNewExtraOrder($extra);
 
 			return (int) $key_id;
@@ -162,9 +164,9 @@ class SWJPaymentOrderHelper
 	}
 
 	/**
-	 * Получает заказ по идентификатору
+	 * Получает заказ по идентификатору ключа
 	 *
-	 * @param   int  $id
+	 * @param   int  $id    Идентификатор ключа
 	 *
 	 * @return mixed|null
 	 * @since 1.0.0
@@ -204,10 +206,10 @@ class SWJPaymentOrderHelper
 	private static function _createNewExtraOrder(array $data): void
 	{
 		$db      = Factory::getDbo();
-		$columns = 'key_id,payment_create_date,processor,transaction_id,payment_received_date,extra';
+		$columns = 'key_id,payment_create_date,processor,transaction_id,payment_received_date,extra,amount';
 
 		$values = $data['key_id'] . ',"' . self::_getEmptyDateFormat($data['payment_create_date']) . '","' . $data['processor'] . '","' . $data['transaction_id'] . '","'
-			. self::_getEmptyDateFormat($data['payment_received_date']) . '","' . $data['extra'] . '"';
+			. self::_getEmptyDateFormat($data['payment_received_date']) . '","' . $data['extra'] . '",'.$data['amount'];
 
 		$query = $db->getQuery(true)
 			->insert($db->quoteName('#__swjprojects_order'))
@@ -395,6 +397,27 @@ class SWJPaymentOrderHelper
                 ' WHERE ' . $db->quoteName('order') . ' = ' . $db->quote($order_number) . ')');
         $db->setQuery($query);
         return $db->execute();
+    }
+
+    /**
+     * Получает заказ по идентификатору закза
+     * @param int $order_id Идентификатор заказа
+     * @return mixed|null
+     * @since 1.0.1
+     */
+    public static function getOrderByOrderId(int $order_id): mixed
+    {
+        if($order_id) {
+            $db    = Factory::getDbo();
+            $query = $db->getQuery(true)
+                ->select($db->quoteName('key_id'))
+                ->from($db->quoteName('#__swjprojects_order'))
+                ->where($db->quoteName('id') . ' = ' . $db->quote($order_id));
+            $db->setQuery($query);
+            $id = $db->loadResult();
+            return self::getOrderById($id);
+        }
+        return null;
     }
 
 }
