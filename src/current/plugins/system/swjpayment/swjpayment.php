@@ -368,7 +368,7 @@ class PlgSystemSWJPayment extends SWJPaymentPlugin
                 // Оповещение о результатах проведенной оплаты от процессинга
                 // Пример оповещения:
                 // https://ВАШ_САЙТ/index.php?option=com_ajax&plugin=swjpayment&format=json&action=payment-notification&processor=swjyookassa
-                $post['object'] = $input->getArray();
+                $post = $input->getArray();
                 $this->_logging(array("payment-notification post->getArray()", $post));
                 $response = array();
                 $this->_logging(array("Calling onProcessPayment processor, post", $processor, $post));
