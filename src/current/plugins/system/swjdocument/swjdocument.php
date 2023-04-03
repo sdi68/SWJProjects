@@ -166,7 +166,7 @@ class PlgSystemSWJDocument extends SWJPaymentPlugin
 		{
 			$data = (object) $data;
 		}
-		if (!property_exists($data,'id') || $data->id == 0)
+		if (!$data || !property_exists($data,'id') || $data->id == 0)
 			return true;
 
 		switch (true)
