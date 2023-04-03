@@ -43,4 +43,8 @@
            default=""
            disabled="true"
     />
+    <field name="receipt_info"
+           type="hidden"
+           default=""
+    />
 </fieldset>
