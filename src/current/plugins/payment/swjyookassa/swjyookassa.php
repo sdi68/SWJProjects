@@ -298,7 +298,7 @@ class PlgPaymentSWJYookassa extends SWJGatewayPlugin
      */
     public function onProcessPayment(string $processor, array $post, array &$payment_response): bool
     {
-        $this->_logging(array("SWJYookassa.onProcessPayment"));
+        $this->_logging(array("SWJYookassa.onProcessPayment started..."));
         if ($this->_checkProcessor($processor)) {
             $payment_response = array_merge($payment_response, array(
                     "processor" => $processor,
@@ -311,6 +311,7 @@ class PlgPaymentSWJYookassa extends SWJGatewayPlugin
             $this->_logging(array("SWJYookassa.onProcessPayment payment_response",$payment_response));
             return true;
         }
+        $this->_logging(array("SWJYookassa.onProcessPayment finished processor not valid (processor, this_name)",$processor,$this->_name));
         return true;
     }
 
