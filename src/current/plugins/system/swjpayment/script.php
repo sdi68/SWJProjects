@@ -122,8 +122,9 @@ if (!class_exists('plgSystemSWJPaymentInstallerScript'))
                 }
             </style>
 
-            <h3>The system plugin SWJPayment v1.0.0 Changelog</h3>
+            <h3>The system plugin SWJPayment v1.0.1 Changelog</h3>
             <ul class="version-history">
+                <li><span class="version-upgraded">1.0.0</span> Add Joomla 4 support.</li>
                 <li><span class="version-new">NEW</span> First version.</li>
             </ul>
 			<?php if ($pluginId) { ?>
