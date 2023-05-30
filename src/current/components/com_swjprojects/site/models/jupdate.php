@@ -520,7 +520,7 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 					}
 
 					// Set client
-					$item->client = $item->project_joomla->get('client', 0);
+					$item->client = $item->project_joomla->get('client_id', 0);
 
 					// Set files format
 					$item->files = Folder::files($files_root . '/' . $item->id, 'download', false);
