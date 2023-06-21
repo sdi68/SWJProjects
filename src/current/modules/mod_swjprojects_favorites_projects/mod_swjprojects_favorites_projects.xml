@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ @package    SW JProjects Payment
-  ~ @subpackage module mod_swjprojects_favorites_projects
-  ~ @version    1.0.0
-  ~ @author     Econsult lab - https://econsultlab.ru
-  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @package    SWJProjects Component
+  ~ @subpackage    mod_swjprojects_favorite_projects
+  ~ @version    2.0.1
+  ~ @author Econsult Lab.
+  ~ @based on   SW JProjects Septdir Workshop - www.septdir.com
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
   ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
-  ~  @link       https://econsultlab.ru/
+  ~ @link       https://econsultlab.ru
   -->
 
 <extension version="3.9" type="module" client="site" method="upgrade">
     <name>MOD_SWJPROJECTS_FAVORITES_PROJECTS</name>
     <author>ECL</author>
-    <creationDate>November 2022</creationDate>
+    <creationDate>June 2023</creationDate>
     <copyright>Copyright (c) 2022 ECL. All rights reserved.</copyright>
     <copyright>Copyright (c) 2018 - 2022 Septdir Workshop. All rights reserved.</copyright>
     <license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
     <authorEmail>info@econsultlab.ru</authorEmail>
     <authorUrl>https://econsultlab.ru</authorUrl>
-    <version>1.0.0</version>
+    <version>2.0.1</version>
+    <ecltype>free</ecltype>
     <description>MOD_SWJPROJECTS_FAVORITES_PROJECTS_DESCRIPTION</description>
     <scriptfile>script.php</scriptfile>
     <languages folder="language">
@@ -124,7 +126,7 @@
     </config>
     <updateservers>
         <server type="extension" name="mod_swjprojects_favorites_projects">
-            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/modules/mod_swjprojects_favorites_projects/update_mod_swjprojects_favorites_projects.xml
+            https://econsultlab.ru/component/swjprojects/jupdate?element=mod_swjprojects_favorites_projects.xml
         </server>
     </updateservers>
 </extension>
