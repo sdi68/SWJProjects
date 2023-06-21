@@ -1,7 +1,7 @@
 <?php
 /*
  * @package    SW JProjects Component
- * @version    1.6.3
+ * @version    1.0.0
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
