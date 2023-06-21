@@ -13,7 +13,7 @@
 <extension version="4.0" type="component" method="upgrade">
 	<name>COM_SWJPROJECTS</name>
 	<author>ECL</author>
-	<creationDate>August 2022</creationDate>
+	<creationDate>June 2023</creationDate>
 	<copyright>Copyright (c) 2018 - 2022 ECL forked Septdir Workshop. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>info@econsultlab.ru</authorEmail>
