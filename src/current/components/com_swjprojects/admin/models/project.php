@@ -32,6 +32,7 @@ class SWJProjectsModelProject extends AdminModel
 	 *
 	 * @return  mixed  Project object on success, false on failure.
 	 *
+	 * @throws Exception
 	 * @since  1.0.0
 	 */
 	public function getItem($pk = null)
