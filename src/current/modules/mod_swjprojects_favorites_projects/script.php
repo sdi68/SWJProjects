@@ -1,12 +1,13 @@
 <?php
 /*
- * @package    SW JProjects Payment
- * @subpackage module mod_swjprojects_favorites_projects
- * @version    1.0.0
- * @author     Econsult lab - https://econsultlab.ru
- * @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+ * @package    SWJProjects Component
+ * @subpackage    mod_swjprojects_favorite_projects
+ * @version    2.0.1
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- *  @link       https://econsultlab.ru/
+ * @link       https://econsultlab.ru
  */
 
 use Joomla\CMS\Factory;
@@ -105,8 +106,9 @@ if (!class_exists('mod_swjprojects_favorites_projectsInstallerScript'))
                 }
             </style>
 
-            <h3>The module mod_swjprojets_favorites_projects v1.0.0 Changelog</h3>
+            <h3>The module mod_swjprojets_favorites_projects v2.0.1 Changelog</h3>
             <ul class="version-history">
+                <li><span class="version-upgraded">2.0.1</span> Добавлена поддержка базового проекта.</li>
                 <li><span class="version-new">NEW</span> First version.</li>
             </ul>
 			<?php if (0): ?>
