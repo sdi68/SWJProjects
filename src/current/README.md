@@ -1,9 +1,3 @@
-[![SW JProjects](https://www.septdir.com/images/solutions/projects/1/en-GB/cover.jpg)](https://www.septdir.com/solutions/joomla/components/swjprojects)  
-[![Information](https://img.shields.io/badge/information--0.svg?style=for-the-badge&colorA=555&colorB=555&logoWidth=20)](https://www.septdir.com/solutions/joomla/components/swjprojects)
-[![Support](https://img.shields.io/badge/support--0.svg?style=for-the-badge&colorA=555&colorB=555&logoWidth=20)](https://www.septdir.com/support#solution=swjprojects)
-[![Demo](https://img.shields.io/badge/demo--0.svg?style=for-the-badge&colorA=555&colorB=555&logoWidth=20)](https://joomla.septdir.com/swjprojects)
-[![Download](https://img.shields.io/github/release/SeptdirWorkshop/SWJProjects.svg?style=for-the-badge&colorA=555&colorB=1e87f0&label=download)](https://www.septdir.com/solutions/download?element=pkg_swjprojects)
-
 ## Features
 ### Digital Projects Catalog
 Component provides the creation and operation of digital projects catalog (programs, files, scripts, extensions, modules, etc.) and allows you to manage their description, characteristics and provides the ability of downloads.
@@ -48,6 +42,8 @@ Developers who create extensions for Joomla! CMS are provided with additional fu
 *Integration with payment services providers (included YooKassa)*
 * **Task plugin**
 *Automatic scheduled deleting uncompleted orders*
+* **Only Update Server for project**
+*If the extension includes several components, and they can be updated independently, but you do not want to publish them to site visitors, then you can specify that this component uses only the Update Server (only for Joomla extension).*
 
 ### Modules
 * **Favorite projects module**
