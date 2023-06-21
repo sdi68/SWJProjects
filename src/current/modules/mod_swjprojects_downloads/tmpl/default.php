@@ -1,12 +1,13 @@
 <?php
 /*
- * @package    SW JProjects Payment
- * @subpackage module mod_swjprojects_downloads
- * @version    1.0.0
- * @author     Econsult lab - https://econsultlab.ru
- * @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+ * @package    SWJProjects Component
+ * @subpackage    mod_swjprojects_downloads
+ * @version    2.0.1
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
  * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link       https://econsultlab.ru/
+ * @link       https://econsultlab.ru
  */
 
 defined('_JEXEC') or die;
@@ -30,7 +31,7 @@ $style = $params->get('moduleclass_sfx', '');
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>Заголовок</td>
+                    <th colspan="6">Расширения доступные для скачивания</th>
                 </tr>
                 </thead>
                 <tbody>

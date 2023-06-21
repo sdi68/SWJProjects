@@ -105,8 +105,9 @@ if (!class_exists('mod_swjprojects_downloadsInstallerScript'))
                 }
             </style>
 
-            <h3>The module mod_swjprojets_downloads v1.0.0 Changelog</h3>
+            <h3>The module mod_swjprojets_downloads v2.0.1 Changelog</h3>
             <ul class="version-history">
+                <li><span class="version-upgraded">2.0.1</span> Добавлена поддержка вывода только самостоятельных расширений.</li>
                 <li><span class="version-new">NEW</span> First version.</li>
             </ul>
 			<?php if (0): ?>

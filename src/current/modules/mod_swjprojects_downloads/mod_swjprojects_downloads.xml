@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ @package    SW JProjects Payment
-  ~ @subpackage module mod_swjprojects_downloads
-  ~ @version    1.0.0
-  ~ @author     Econsult lab - https://econsultlab.ru
-  ~ @copyright  Copyright (c) 2022 Econsult Lab. All rights reserved.
+  ~ @package    SWJProjects Component
+  ~ @subpackage    mod_swjprojects_downloads
+  ~ @version    2.0.1
+  ~ @author Econsult Lab.
+  ~ @based on   SW JProjects Septdir Workshop - www.septdir.com
+  ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
   ~ @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
-  ~ @link       https://econsultlab.ru/
+  ~ @link       https://econsultlab.ru
   -->
 
 <extension version="3.9" type="module" client="site" method="upgrade">
@@ -18,8 +19,9 @@
     <license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
     <authorEmail>info@econsultlab.ru</authorEmail>
     <authorUrl>https://econsultlab.ru</authorUrl>
-    <version>1.0.0</version>
+    <version>2.0.1</version>
     <description>MOD_SWJPROJECTS_DOWNLOADS_DESCRIPTION</description>
+    <ecltype>free</ecltype>
     <languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.mod_swjprojects_downloads.ini</language>
         <language tag="ru-RU">ru-RU/ru-RU.mod_swjprojects_downloads.sys.ini</language>
@@ -77,7 +79,7 @@
     </config>
     <updateservers>
         <server type="extension" name="mod_swjprojects_downloads">
-            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/modules/mod_swjprojects_downloads/update_mod_swjprojects_downloads.xml
+            https://econsultlab.ru/component/swjprojects/jupdate?element=mod_swjprojects_downloads
         </server>
     </updateservers>
 </extension>
