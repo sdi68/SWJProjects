@@ -1,8 +1,8 @@
 <?php
 /*
- * @package    SW JProjects Component
+ * @package    SWJProjects Component
  * @subpackage    com_swjprojects
- * @version    1.6.3
+ * @version    2.0.1
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -186,9 +186,9 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 	 *
 	 * @param   integer  $pk  The id of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  string|Exception  Update servers xml string on success, exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -233,9 +233,9 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 	 *
 	 * @param   integer  $pk  The id of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  string|boolean  Cached xml string on success, false on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -288,9 +288,9 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 	 *
 	 * @param   integer  $pk  The id of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  boolean|Exception  True if project enable joomla update server, exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -369,9 +369,9 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 	 *
 	 * @param   integer  $pk  The id of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  SimpleXMLElement|Exception  Project updates SimpleXMLElement on success, exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -520,7 +520,7 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 					}
 
 					// Set client
-					$item->client = $item->project_joomla->get('client_id', 0);
+					$item->client = $item->project_joomla->get('client', 0);
 
 					// Set files format
 					$item->files = Folder::files($files_root . '/' . $item->id, 'download', false);
@@ -528,33 +528,69 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 					// Set file
 					$item->file = (!empty($item->files)) ? $item->files[0] : false;
 
-					// Add to updates
-					$update = $updates->addChild('update');
-					$update->addChild('name', $item->name);
-					$update->addChild('description', $item->description);
-					$update->addChild('element', $item->element);
-					$update->addChild('type', $item->type);
-					$update->addChild('folder', $item->folder);
-					$update->addChild('client', $item->client);
-					$update->addChild('version', $item->version);
-
-					$infourl = $update->addChild('infourl', $site_root . $item->link);
-					$infourl->addAttribute('title', $item->name);
-
-					if ($item->file)
+					/**
+					 * Формируем свою ветку update для каждой версии Joomla
+					 * @since 2.0.1
+					 */
+					$j_versions = explode("|", $item->joomla_version);
+					foreach ($j_versions as $jv)
 					{
-						$downloads   = $update->addChild('downloads');
-						$downloadurl = $downloads->addChild('downloadurl', $site_root . $item->download);
-						$downloadurl->addAttribute('type', 'full');
-						$downloadurl->addAttribute('format', File::getExt($item->file));
+						$jp = str_starts_with($jv, '4') ? 4 : 3;
+						// Add to updates for each joomla platforms
+						$update = $updates->addChild('update');
+						$update->addChild('name', $item->name);
+						$update->addChild('description', $item->description);
+						$update->addChild('element', $item->element);
+						$update->addChild('type', $item->type);
+						$update->addChild('folder', $item->folder);
+						if ($jp == 4)
+						{
+							switch ($item->client)
+							{
+								case 0:
+									$item->client = "site";
+									break;
+								case 1:
+									$item->client = "administrator";
+									break;
+								case 2:
+									$item->client = "installation";
+									break;
+								case 3:
+									$item->client = "api";
+									break;
+								case 4:
+									$item->client = "cli";
+									break;
+							}
+							if (in_array($item->type, array("module", "template")))
+							{
+								$update->addChild('client', $item->client);
+							}
+						}
+						else
+						{
+							$update->addChild('client', $item->client);
+						}
+						$update->addChild('version', $item->version);
+						$infourl = $update->addChild('infourl', $site_root . $item->link);
+						$infourl->addAttribute('title', $item->name);
+
+						if ($item->file)
+						{
+							$downloads   = $update->addChild('downloads');
+							$downloadurl = $downloads->addChild('downloadurl', $site_root . $item->download);
+							$downloadurl->addAttribute('type', 'full');
+							$downloadurl->addAttribute('format', File::getExt($item->file));
+						}
+
+						$tags = $update->addChild('tags');
+						$tags->addChild('tag', $item->tag);
+
+						$targetPlatform = $update->addChild('targetPlatform');
+						$targetPlatform->addAttribute('name', 'joomla');
+						$targetPlatform->addAttribute('version', $jv);
 					}
-
-					$tags = $update->addChild('tags');
-					$tags->addChild('tag', $item->tag);
-
-					$targetPlatform = $update->addChild('targetPlatform');
-					$targetPlatform->addAttribute('name', 'joomla');
-					$targetPlatform->addAttribute('version', '');
 				}
 
 				$this->_extensionXML[$hash] = $updates;
@@ -571,9 +607,9 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 	/**
 	 * Method to get collection xml.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  SimpleXMLElement|Exception  Projects collection SimpleXMLElement on success, exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -709,9 +745,9 @@ class SWJProjectsModelJUpdate extends BaseDatabaseModel
 	 *
 	 * @param   string  $pk  The id of the project.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  integer|Exception  Project id on success, exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */

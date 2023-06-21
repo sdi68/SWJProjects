@@ -1,8 +1,8 @@
 <?php
 /*
- * @package    SW JProjects Component
+ * @package    SWJProjects Component
  * @subpackage    com_swjprojects
- * @version    1.6.3
+ * @version    2.0.1
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -59,7 +59,7 @@ class SWJProjectsModelProject extends AdminModel
 
 			// Default values
 			$item->translates = array();
-			$item->set('downloads',0);
+			$item->set('downloads', 0);
 
 			// Set values
 			if (!empty($item->id))
@@ -95,7 +95,7 @@ class SWJProjectsModelProject extends AdminModel
 					->from('#__swjprojects_versions')
 					->where('project_id = ' . $item->id);
 				$db->setQuery($query);
-				$item->set('downloads',$db->loadResult());
+				$item->set('downloads', $db->loadResult());
 			}
 		}
 
@@ -150,9 +150,9 @@ class SWJProjectsModelProject extends AdminModel
 	 * @param   array    $data      Data for the form.
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  Form|boolean  A Form object on success, false on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -180,9 +180,9 @@ class SWJProjectsModelProject extends AdminModel
 	/**
 	 * Method to get the data that should be injected in the form.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  mixed  The data for the form.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -199,14 +199,14 @@ class SWJProjectsModelProject extends AdminModel
 	}
 
 	/**
-	 * Method for getting the translate forms from the model.
+	 * Method for getting the translation forms from the model.
 	 *
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 * @param   boolean  $clear     Optional argument to force load a new forms.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  array  Translates forms array on success, false on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -294,9 +294,9 @@ class SWJProjectsModelProject extends AdminModel
 	 * @param   array   $data   The data to validate.
 	 * @param   string  $group  The name of the field group to validate.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  array|boolean  Array of filtered data if valid, false otherwise.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -334,9 +334,9 @@ class SWJProjectsModelProject extends AdminModel
 	 *
 	 * @param   array  $data  The form data.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  boolean  True on success.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -445,7 +445,16 @@ class SWJProjectsModelProject extends AdminModel
 		// Prepare params field data
 		if (isset($data['params']))
 		{
-			$registry       = new Registry($data['params']);
+			/**
+			 * Удаляем ссылку на базовый проект если снимается признак необходимости только сервера обновлений
+			 * @since  2.0.1
+			 */
+			$registry = new Registry($data['params']);
+			if ($registry->get('only_update', "0") == "0")
+			{
+				$registry->remove('only_update');
+				$registry->remove('base_project');
+			}
 			$data['params'] = $registry->toString('json', array('bitmask' => JSON_UNESCAPED_UNICODE));
 		}
 
@@ -525,9 +534,9 @@ class SWJProjectsModelProject extends AdminModel
 	 *
 	 * @param   string  $element  The element.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  string  Contains the modified element.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -547,9 +556,9 @@ class SWJProjectsModelProject extends AdminModel
 	 *
 	 * @param   string  $alias  The alias.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  string  Contains the modified alias.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -569,9 +578,9 @@ class SWJProjectsModelProject extends AdminModel
 	 *
 	 * @param   array &$pks  An array of record primary keys.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  boolean  True if successful, false if an error occurs.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */

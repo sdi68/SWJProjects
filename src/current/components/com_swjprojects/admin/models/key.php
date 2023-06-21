@@ -1,8 +1,8 @@
 <?php
 /*
- * @package    SW JProjects Component
+ * @package    SWJProjects Component
  * @subpackage    com_swjprojects
- * @version    1.6.3
+ * @version    2.0.1
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -66,9 +66,9 @@ class SWJProjectsModelKey extends AdminModel
 	 * @param   array    $data      Data for the form.
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  Form|boolean  A Form object on success, false on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.3.0
 	 */
@@ -96,9 +96,9 @@ class SWJProjectsModelKey extends AdminModel
 	/**
 	 * Method to get the data that should be injected in the form.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  mixed  The data for the form.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.3.0
 	 */
@@ -119,9 +119,9 @@ class SWJProjectsModelKey extends AdminModel
 	 *
 	 * @param   array  $data  The form data.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  boolean  True on success.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.3.0
 	 */
@@ -137,9 +137,28 @@ class SWJProjectsModelKey extends AdminModel
 			$table->load($pk);
 			$isNew = false;
 		}
-
 		// Prepare projects field data
-		if (isset($data['projects'])) $data['projects'] = implode(',', $data['projects']);
+		/** @since 2.0.1 */
+		if (isset($data['projects']))
+		{
+			// Если есть базовый проект, то добавляем его подчиненные проекты
+			$db   = Factory::getDbo();
+			$adds = array();
+			foreach ($data['projects'] as $project_id)
+			{
+				$query = $db->getQuery(true);
+				$query->select($db->quoteName('id'))
+					->from($db->quoteName('#__swjprojects_projects'))
+					->where($db->quoteName('params') . ' LIKE "%\\"only_update\\":\\"1\\",\\"base_project\\":\\"' . $project_id . '\\"%"');
+				$db->setQuery($query);
+				$result = $db->loadColumn();
+				if (is_array($result))
+					$adds = array_merge($adds, $result);
+
+			}
+			$data['projects'] = array_unique(array_merge($data['projects'], $adds));
+			$data['projects'] = implode(',', $data['projects']);
+		}
 
 		// Prepare key field data
 		if ($isNew || $data['key_regenerate'] || empty($data['key']))
@@ -183,9 +202,9 @@ class SWJProjectsModelKey extends AdminModel
 	/**
 	 * Method to generate new key.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  string  New key value.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.3.0
 	 */

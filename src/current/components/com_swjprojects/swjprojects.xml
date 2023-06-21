@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ @package    SW JProjects Component
+  ~ @package    SWJProjects Component
   ~ @subpackage    com_swjprojects
-  ~ @version    1.6.3
+  ~ @version    2.0.1
   ~ @author Econsult Lab.
   ~ @based on   SW JProjects Septdir Workshop - www.septdir.com
   ~ @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -18,8 +18,9 @@
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>info@econsultlab.ru</authorEmail>
 	<authorUrl>https://econsultlab.ru</authorUrl>
-	<version>1.6.4</version>
+	<version>2.0.1</version>
 	<description>COM_SWJPROJECTS_DESCRIPTION</description>
+	<ecltype>payed</ecltype>
 	<scriptfile>script.php</scriptfile>
 	<install>
 		<sql>
@@ -95,7 +96,7 @@
 	</layouts>
 	<updateservers>
 		<server type="extension" priority="1" name="SW JProjects">
-			https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/components/com_swjprojects/update_com_swjprojects.xml
+			https://econsultlab.ru/component/swjprojects/jupdate?element=com_swjprojects
 		</server>
 	</updateservers>
 </extension>

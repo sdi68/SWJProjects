@@ -1,8 +1,8 @@
 <?php
 /*
- * @package    SW JProjects Component
+ * @package    SWJProjects Component
  * @subpackage    com_swjprojects
- * @version    1.6.3
+ * @version    2.0.1
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -27,6 +27,7 @@ if (!Factory::getUser()->authorise('core.manage', 'com_swjprojects'))
 	throw new NotAllowed(Text::_('JERROR_ALERTNOAUTHOR'), 403);
 }
 
-$controller = BaseController::getInstance('SWJProjects');
+// TODO надо добавлять путь к каталогу моделей иначе подтягивается модель со стороны сайта
+$controller = BaseController::getInstance('SWJProjects',array('model_path'=>__DIR__.'/models/'));
 $controller->execute(Factory::getApplication()->input->get('task'));
 $controller->redirect();

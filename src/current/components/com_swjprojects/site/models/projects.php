@@ -1,8 +1,8 @@
 <?php
 /*
- * @package    SW JProjects Component
+ * @package    SWJProjects Component
  * @subpackage    com_swjprojects
- * @version    1.6.3
+ * @version    2.0.1
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -275,6 +275,13 @@ class SWJProjectsModelProjects extends ListModel
 		$direction = $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($ordering) . ' ' . $db->escape($direction));
 
+		/**
+		 * Выводим только базовые компоненты (у кого только сервер обновлений - скрываем)
+		 * @since 2.0.1
+		 */
+		$query->where("p.params NOT LIKE '%\"only_update\":\"1\"%'");
+
+
 		return $query;
 	}
 
@@ -385,9 +392,9 @@ class SWJProjectsModelProjects extends ListModel
 	 *
 	 * @param   integer  $pk  The id of the category.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  object|boolean|Exception  Category object on success, false or exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */
@@ -456,7 +463,7 @@ class SWJProjectsModelProjects extends ListModel
 				$data->title = (empty($data->title)) ? $data->alias : $data->title;
 
 				// Set description
-				$data->description = nl2br((string)$data->description);
+				$data->description = nl2br((string) $data->description);
 
 				// Set link
 				$data->slug = $data->id . ':' . $data->alias;
@@ -496,9 +503,9 @@ class SWJProjectsModelProjects extends ListModel
 	 *
 	 * @param   integer  $pk  The id of the category.
 	 *
-	 * @throws  Exception
-	 *
 	 * @return  object|boolean|Exception  Category object on success, false or exception on failure.
+	 *
+	 * @throws  Exception
 	 *
 	 * @since  1.0.0
 	 */

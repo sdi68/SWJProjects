@@ -1,8 +1,8 @@
 <?php
 /*
- * @package    SW JProjects Component
+ * @package    SWJProjects Component
  * @subpackage    com_swjprojects
- * @version    1.6.3
+ * @version    2.0.1
  * @author Econsult Lab.
  * @based on   SW JProjects Septdir Workshop - www.septdir.com
  * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
@@ -12,7 +12,9 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Registry\Registry;
 
 class SWJProjectsModelProjects extends ListModel
 {
@@ -192,12 +194,16 @@ class SWJProjectsModelProjects extends ListModel
 	 *
 	 * @return  mixed  Projects objects array on success, false on failure.
 	 *
+	 * @throws Exception
 	 * @since  1.0.0
 	 */
 	public function getItems()
 	{
 		if ($items = parent::getItems())
 		{
+			/** @var SWJProjectsModelProject $model */
+			BaseDatabaseModel::addIncludePath(__DIR__);
+			$model = BaseDatabaseModel::getInstance('Project', 'SWJProjectsModel', array('ignore_request' => true));
 			foreach ($items as &$item)
 			{
 				// Set title
@@ -205,6 +211,23 @@ class SWJProjectsModelProjects extends ListModel
 
 				// Set category title
 				$item->category_title = (empty($item->category_title)) ? $item->category_alias : $item->category_title;
+
+				/**
+				 * Set base project
+				 * @since 2.0.1
+				 */
+				if ($item->params)
+				{
+					$params                = new Registry($item->params);
+					$item->base_project    = "--";
+					$item->base_project_id = $params->get('base_project', '');
+					if ($item->base_project_id)
+					{
+						$base_project       = $model->getItem($item->base_project_id);
+						$item->base_project = (empty($base_project->title)) ? $base_project->element : $base_project->title;
+					}
+
+				}
 			}
 		}
 

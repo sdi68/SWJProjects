@@ -1,6 +1,16 @@
 <?php
+/*
+ * @package    SWJProjects Component
+ * @subpackage    com_swjprojects
+ * @version    2.0.1
+ * @author Econsult Lab.
+ * @based on   SW JProjects Septdir Workshop - www.septdir.com
+ * @copyright  Copyright (c) 2023 Econsult Lab. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ * @link       https://econsultlab.ru
+ */
 
-use Joomla\CMS\HTML\HTMLHelper;
+use ECLabs\Library\ECLHTMLHelper;
 use Joomla\CMS\Language\Text;
 
 defined('_JEXEC') or die;
@@ -21,7 +31,7 @@ extract($displayData);
     <div class="card">
         <?php if ($icon = $project->images->get('icon')): ?>
             <a href="<?php echo $project->link; ?>">
-                <?php echo HTMLHelper::image($icon, $project->title, array('class' => 'card-img-top')); ?>
+                <?php echo ECLHTMLHelper::image($icon, $project->title, array('class' => 'card-img-top')); ?>
             </a>
         <?php endif; ?>
         <div class="card-body">
