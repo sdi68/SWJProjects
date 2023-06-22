@@ -177,7 +177,7 @@ class JFormFieldProjects extends JFormFieldList
 			$path = substr($path, 1, strlen($path) - 1);
 		}
 
-		return $path;
+		return is_null($path) ? '' : $path;
 	}
 
 }
