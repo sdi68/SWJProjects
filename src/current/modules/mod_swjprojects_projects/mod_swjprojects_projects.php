@@ -57,8 +57,8 @@ else
 $items = array();
 foreach ($model->getItems() as $tmp)
 {
-	$params       = new Registry($tmp->projects->params);
-	$base_project = $params->get('base_project', '');
+	$project_params      = new Registry($tmp->projects->params);
+	$base_project = $project_params->get('base_project', '');
 	if ($base_project)
 		continue;
 	$items[] = $tmp;

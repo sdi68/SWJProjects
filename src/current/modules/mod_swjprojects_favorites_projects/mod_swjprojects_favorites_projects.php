@@ -18,9 +18,6 @@
  * @version     2.0.1
  * @since       1.0.0
  *
- * Variable definitions
- * @var Joomla\Registry\ $params
- * @var ModuleHelper     $module
  */
 defined('_JEXEC') or die;
 
@@ -29,7 +26,11 @@ use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Table\Table;
 use Joomla\Registry\Registry;
-
+/**
+* Variable definitions
+* @var Joomla\Registry\ $params
+* @var ModuleHelper     $module
+*/
 require_once __DIR__ . '/helper.php';
 
 // Register helpers
@@ -81,8 +82,8 @@ if ($use_cat_filter)
 				 * Выводим только базовые или самостоятельные проекты
 				 * @since 2.0.1
 				 */
-				$params       = new Registry($tmp->projects->params);
-				$base_project = $params->get('base_project', '');
+				$project_params       = new Registry($tmp->projects->params);
+				$base_project = $project_params->get('base_project', '');
 				if ($base_project)
 					continue;
 				$items[] = $tmp;
@@ -103,8 +104,8 @@ else
 			 * @since 2.0.1
 			 */
 			$tmp          = $model->getItem($project);
-			$params       = new Registry($tmp->projects->params);
-			$base_project = $params->get('base_project', '');
+			$project_params       = new Registry($tmp->projects->params);
+			$base_project = $project_params->get('base_project', '');
 			if ($base_project)
 				continue;
 			$items[] = $tmp;
