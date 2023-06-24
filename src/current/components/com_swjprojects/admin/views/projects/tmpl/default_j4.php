@@ -67,7 +67,7 @@ $columns = 10;
 									$listDirn, $listOrder); ?>
                             </th>
                             <th scope="col">
-								<?php echo HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'p.title',
+								<?php echo HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'title',
 									$listDirn, $listOrder); ?>
                             </th>
                             <th scope="col">
