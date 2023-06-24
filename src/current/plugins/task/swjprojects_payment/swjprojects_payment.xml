@@ -34,7 +34,7 @@
     <!-- Update servers -->
     <updateservers>
         <server type="extension" priority="1" name="swjpayment">
-            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/plugins/task/swjprojects_payment/update_swjprojects_payment.xml
+            https://econsultlab.ru/component/swjprojects/jupdate?element=plg_swjprojects_payment
         </server>
     </updateservers>
 </extension>

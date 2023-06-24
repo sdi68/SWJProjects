@@ -126,7 +126,7 @@
     </config>
     <updateservers>
         <server type="extension" name="mod_swjprojects_favorites_projects">
-            https://econsultlab.ru/component/swjprojects/jupdate?element=mod_swjprojects_favorites_projects.xml
+            https://econsultlab.ru/component/swjprojects/jupdate?element=mod_swjprojects_favorites_projects
         </server>
     </updateservers>
 </extension>

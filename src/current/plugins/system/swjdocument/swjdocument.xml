@@ -48,7 +48,7 @@
     <!-- Update servers -->
     <updateservers>
         <server type="extension" priority="1" name="swjdocument">
-            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/plugins/system/swjdocument/update_swjdocument.xml
+            https://econsultlab.ru/component/swjprojects/jupdate?element=plg_swjdocument
         </server>
     </updateservers>
 </extension>

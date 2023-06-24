@@ -48,7 +48,7 @@
     <!-- Update servers -->
     <updateservers>
         <server type="extension" priority="1" name="swjyookassa">
-            https://econsultlab.ru/uploads/joomla/packages/pkg_swjprojects/plugins/payment/swjyookassa/update_swjyookassa.xml
+            https://econsultlab.ru/component/swjprojects/jupdate?element=plg_swjyookassa
         </server>
     </updateservers>
 </extension>
